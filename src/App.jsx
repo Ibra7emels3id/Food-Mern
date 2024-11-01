@@ -12,7 +12,6 @@ import Products from './admin/pages/Products/Products';
 import { fetchCartProduct } from './features/CartSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import Cart from './pages/Cart/Cart';
-import Header from './Components/Header';
 import DetailsProduct from './pages/View/DetailsProduct';
 import { fetchUser } from './features/UserSlice';
 import Category from './admin/pages/Category/Category';
@@ -22,21 +21,19 @@ import Success from './pages/Success/Success';
 import { fetchCartPayment } from './features/CartPaymentSlice';
 import Shop from './pages/shop/shop';
 import Transactions from './pages/Transactions/Transactions';
+import Audience from './admin/pages/Audience/Audience';
+import Order from './admin/pages/Order/Order';
+import UpdateProduct from './admin/pages/Products/UpdateProduct';
+import UpdateCategory from './admin/pages/Category/UpdateCategory';
+import Account from './pages/Account/Account';
+import FilterCategory from './pages/FilterCategory/FilterCategory';
 
 function App() {
     const token = localStorage.getItem('token');
-    const [UserData, setUserData] = useState(null);
     const dispatch = useDispatch();
     const { user, isLoading } = useSelector((state) => state.user);
     const userId = user?.user?._id;
     const [isUserLoading, setIsUserLoading] = useState(true);
-
-    // Check Token
-    useEffect(() => {
-        if (!token) {
-            toast.error('Please log in first');
-        }
-    }, [token]);
 
     // Get Data From Api
     useEffect(() => {
@@ -76,9 +73,9 @@ function App() {
                     <Route path="/cart/checkout/payment/success/:id" element={<Success />} />
                     <Route path="/shop" element={<Shop />} />
                     <Route path="/transactions" element={<Transactions />} />
+                    <Route path="/account/:id" element={<Account />} />
+                    <Route path="/category/:id" element={<FilterCategory />} />
 
-
-                    
 
 
                     <Route path="/admin" element={<Admin UserData={user} />} />
@@ -86,6 +83,11 @@ function App() {
                     <Route path="/admin/products" element={<Products UserData={user} />} />
                     <Route path="/admin/category" element={<Category UserData={user} />} />
                     <Route path="/admin/category/add-category" element={<AddCategory/>} />
+                    <Route path="/admin/category/edit-category/:id" element={<UpdateCategory/>} />
+                    <Route path="/admin/audience" element={<Audience/>} />
+                    <Route path="/admin/order" element={<Order/>} />
+                    <Route path="/admin/product/edit-product/:id" element={<UpdateProduct />} />
+
                     
                 </Routes>
             </BrowserRouter>

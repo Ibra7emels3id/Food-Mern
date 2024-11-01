@@ -2,29 +2,27 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from './components/Header';
+import { useSelector } from 'react-redux';
+import Loading from '../Components/Loading';
 
 const Admin = ({ UserData }) => {
     const Navigate = useNavigate();
-    const [loading, setLoading] = useState(true);
+    const { user, sLoading } = useSelector((state) => state.user)
+    // const [loading, setLoading] = useState(true);
 
 
 
-    
-    useEffect(() => {
-        const handleUser = async () => {
-            if (UserData) {
-                if (UserData.role !== 'admin') {
-                    Navigate('/');
-                } else {
-                    setLoading(false);
-                }
-            }
-        };
-        handleUser();
-    }, [UserData, Navigate]);
 
-    if (loading) {
-        return <div>Loading...</div>;
+    // Check User
+    if (!sLoading) {
+        if (user?.role !== 'admin') {
+            Navigate('/');
+        }
+    }
+
+
+    if (sLoading) {
+        return <Loading />;
     }
 
     return (

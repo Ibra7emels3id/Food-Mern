@@ -1,16 +1,17 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import Header from '../../Components/Header';
 import Footer from '../../Components/Footer';
-import Products from './_Components/Products';
 
-const Shop = () => {
+const FilterCategory = () => {
+    const {id} = useParams()
     return (
         <>
             <Header />
-            <Products />
+            <h3>Category {id}</h3>
             <Footer />
         </>
     );
 }
 
-export default Shop;
+export default FilterCategory;

@@ -11,6 +11,7 @@ const Login = ({ UserData }) => {
     // eslint-disable-next-line react/prop-types
     const User = UserData?.user
     const [loading, setLoading] = useState(false)
+    const [CheckPass , setCheckPass] = useState('password')
     const [data, setData] = useState({
         email: '',
         password: ''
@@ -70,13 +71,13 @@ const Login = ({ UserData }) => {
                 <div className="bg-gray-50 font-[sans-serif]">
                     <div className="min-h-screen flex flex-col items-center justify-center py-6 px-4">
                         <div className="max-w-md w-full">
-                            <Link to="/">
+                            {<Link to="/">
                                 <img
                                     src="https://themewagon.github.io/FoodMart/images/logo.png"
                                     alt="logo"
                                     className="w-40 mb-8 mx-auto block"
                                 />
-                            </Link>
+                            </Link> || ''}
                             <div className="p-8 rounded-2xl bg-white shadow">
                                 <h2 className="text-gray-800 text-center text-2xl font-bold">
                                     Sign in
@@ -93,7 +94,7 @@ const Login = ({ UserData }) => {
                                                 name="email"
                                                 type="email"
                                                 required="true"
-                                                className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                                                className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-yellow"
                                                 placeholder="Enter Your Email"
                                             />
                                             <svg
@@ -118,16 +119,22 @@ const Login = ({ UserData }) => {
                                                 value={data.password}
                                                 onChange={handleChange}
                                                 name="password"
-                                                type="password"
+                                                type={CheckPass}
                                                 required="true"
-                                                className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                                                className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-yellow"
                                                 placeholder="Enter Your password"
                                             />
-                                            <svg
+                                            <svg onClick={()=>{
+                                                if (CheckPass === 'password') {
+                                                    setCheckPass('text')
+                                                }else{
+                                                    setCheckPass('password')
+                                                }
+                                            }}
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 fill="#bbb"
                                                 stroke="#bbb"
-                                                className="w-4 h-4 absolute right-4 cursor-pointer"
+                                                className="w-5 h-5 absolute right-4 cursor-pointer "
                                                 viewBox="0 0 128 128"
                                             >
                                                 <path
@@ -137,28 +144,10 @@ const Login = ({ UserData }) => {
                                             </svg>
                                         </div>
                                     </div>
-                                    <div className="flex flex-wrap items-center justify-between gap-4">
-                                        <div className="flex items-center">
-                                            <input
-                                                id="remember-me"
-                                                name="remember-me"
-                                                type="checkbox"
-                                                className="h-4 w-4 shrink-0 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                                            />
-                                            <label
-                                                htmlFor="remember-me"
-                                                className="ml-3 block text-sm text-gray-800"
-                                            >
-                                                <Link to='/'>
-                                                    Remember me
-                                                </Link>
-                                            </label>
-                                        </div>
-                                    </div>
                                     <div className="!mt-8">
                                         <button
                                             type="submit"
-                                            className="w-full py-3 px-4 text-sm tracking-wide rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none"
+                                            className="w-full py-3 px-4 text-sm tracking-wide rounded-lg text-white bg-yellow hover:bg-[#edb43a] focus:outline-none"
                                         >
                                             Sign in
                                         </button>

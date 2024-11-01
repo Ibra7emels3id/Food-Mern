@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 
 // Fetch the User
@@ -18,6 +19,20 @@ export const fetchUser = createAsyncThunk('fetchUser', async () => {
     }
 })
 
+// Update User
+
+export const UpdateUserData = createAsyncThunk('UpdateUserData', async ({ formData }, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const id = state?.user.user.user?._id;
+    try {
+        const res = await axios.put(`${import.meta.env.VITE_SOME_URL}/api/update-user/${id}`, formData)
+        toast.success(res.data.message);
+        return res.data;
+    } catch (error) {
+        console.error('Update user error:', error.response ? error.response.data : error.message);
+    }
+})
+
 // LogOut user
 export const logOutUser = createAsyncThunk('logOutUser', async () => {
     try {
@@ -33,15 +48,55 @@ export const logOutUser = createAsyncThunk('logOutUser', async () => {
     }
 });
 
+// Get All Users
+export const getAllUsers = createAsyncThunk('getAllUsers', async () => {
+    try {
+        const response = await axios.get(`${import.meta.env.VITE_SOME_URL}/api/all/users`)
+        return response.data;
+    } catch (error) {
+        console.error(error);
+    }
+})
+
+// Blocked User
+export const blockUser = createAsyncThunk('blockUser', async (userId) => {
+    try {
+        const response = await axios.put(`${import.meta.env.VITE_SOME_URL}/api/user/block/${userId}`);
+        toast.success(response.data.message);
+        return response.data;
+    } catch (error) {
+        console.error('Block user error:', error.response ? error.response.data : error.message);
+        throw error;
+    }
+});
+
+// Delete the user
+export const deleteUser = createAsyncThunk('deleteUser', async (userId) => {
+    try {
+        const response = await axios.delete(`${import.meta.env.VITE_SOME_URL}/api/user/delete/${userId}`);
+        toast.info(response.data.message);
+        return response.data;
+    } catch (error) {
+        console.error('Delete user error:', error.response ? error.response.data : error.message);
+        throw error;
+    }
+});
+
+
+
+
+
+
+
 
 // User slice
-
 const UserSlice = createSlice({
     name: 'User',
     initialState: {
         user: null,
         sLoading: false,
         error: null,
+        allUsers: [],
     },
     extraReducers: (builder) => {
         // get user
@@ -67,6 +122,45 @@ const UserSlice = createSlice({
             state.user = action.payload.user;
         });
         builder.addCase(logOutUser.rejected, (state, action) => {
+            state.sLoading = false;
+            state.error = action.error.message;
+        });
+        // Get All Users
+        builder.addCase(getAllUsers.pending, (state, action) => {
+            state.sLoading = true;
+            state.error = null;
+        });
+        builder.addCase(getAllUsers.fulfilled, (state, action) => {
+            state.sLoading = false;
+            state.allUsers = action.payload;
+        });
+        builder.addCase(getAllUsers.rejected, (state, action) => {
+            state.sLoading = false;
+            state.error = action.error.message;
+        });
+        // Block User
+        builder.addCase(blockUser.pending, (state, action) => {
+            state.sLoading = true;
+            state.error = null;
+        });
+        builder.addCase(blockUser.fulfilled, (state, action) => {
+            state.sLoading = false;
+            state.allUsers = state.allUsers.filter(user => user._id !== action.payload.userId);
+        });
+        builder.addCase(blockUser.rejected, (state, action) => {
+            state.sLoading = false;
+            state.error = action.error.message;
+        });
+        // Delete User
+        builder.addCase(deleteUser.pending, (state, action) => {
+            state.sLoading = true;
+            state.error = null;
+        });
+        builder.addCase(deleteUser.fulfilled, (state, action) => {
+            state.sLoading = false;
+            state.allUsers = state.allUsers.filter(user => user._id !== action.payload.userId);
+        });
+        builder.addCase(deleteUser.rejected, (state, action) => {
             state.sLoading = false;
             state.error = action.error.message;
         });

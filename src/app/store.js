@@ -13,7 +13,9 @@ const store = configureStore({
         cart: cartSlice,
         user: UserSlice,
         category: CategorySlice,
-        cartPay: cartPaymentSlice
+        cartPay: cartPaymentSlice,
+        allUsers:UserSlice,
+        payments:cartPaymentSlice,
     },
 })
 

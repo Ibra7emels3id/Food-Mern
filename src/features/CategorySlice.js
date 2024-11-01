@@ -25,6 +25,25 @@ export const AddToCategory = createAsyncThunk('AddToCategory', async ({ formData
     }
 })
 
+// Update Category to Server
+export const UpdateCategoryId = createAsyncThunk('UpdateCategory', async ({ id, formData }) => {
+    console.log(id, formData);
+    try {
+        const res = await axios.put(`${import.meta.env.VITE_SOME_URL}/api/edit-category/${id}`, formData)
+        toast.success('Update category successfully', {
+            position: "bottom-center",
+            autoClose: 3000,
+        })
+        return res.data;
+    } catch (error) {
+        toast.error('Failed to update category', {
+            position: "bottom-center",
+            autoClose: 3000,
+        })
+        throw error;
+    }
+})
+
 // get Category from Server
 export const FetchCategory = createAsyncThunk('FetchCategory', async () => {
     try {

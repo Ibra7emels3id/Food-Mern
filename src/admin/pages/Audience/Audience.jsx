@@ -4,8 +4,10 @@ import { fetchProducts } from '../../../features/ProductSlice';
 import Header from '../../components/Header';
 import { Link, useNavigate } from 'react-router-dom';
 import { Dialog, Paper, Rating, styled, Table, TableBody, TableCell, tableCellClasses, TableContainer, TableHead, TableRow } from '@mui/material';
-import DialogDelProduct from './_components/DialogDelProduct';
+// import DialogDelProduct from './_components/DialogDelProduct';
 import Loading from '../../../Components/Loading';
+import { blockUser, getAllUsers } from '../../../features/UserSlice';
+import DialogDelUser from './_components/DialogDelUser';
 
 
 
@@ -29,15 +31,17 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
-const Products = () => {
+const Audience = () => {
     const Navigate = useNavigate();
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(true);
-    const { products, isLoading } = useSelector((state) => state.Product)
-    const { user , sLoading } = useSelector((state) => state.user)
+    const { user, sLoading } = useSelector((state) => state.user)
     const [open, setOpen] = React.useState(false);
-    const [deleteproductId, setDeleteProductId] = useState(null);
-    const [DeleteProductName, setDeleteProductName] = useState(null);
+    const [deleteUserId, setdeleteUserId] = useState(null);
+    const [DeleteUserName, setDeleteUserName] = useState(null);
+    const [searchTerm, setSearchTerm] = useState(null);
+    const { allUsers } = useSelector((state) => state.allUsers)
+
 
 
     // Handle Delete product 
@@ -50,6 +54,12 @@ const Products = () => {
     };
 
 
+    // HAndle Block User
+    const handleBlockUser = async (id) => {
+        await dispatch(blockUser(id));
+        dispatch(getAllUsers())
+    };
+
     // Check User
     if (!sLoading) {
         if (user?.role !== 'admin') {
@@ -58,13 +68,14 @@ const Products = () => {
     }
 
 
+
+    // Use Effect 
     useEffect(() => {
         dispatch(fetchProducts())
-    }, [ Navigate, dispatch]);
+        dispatch(getAllUsers())
+    }, [Navigate, dispatch, searchTerm]);
 
-    if (sLoading) return <Loading />;
 
-    
 
     return (
         <>
@@ -72,51 +83,45 @@ const Products = () => {
                 <Header />
                 <div className="flex w-full overflow-auto ml-[50px] md:ml-[250px] mt-[70px] p-2 md:p-12">
                     <div className="flex flex-col w-full md:w-[100%] m-auto">
-                        <h2 className="text-2xl font-bold text-center mb-4">All Products</h2>
-                        <div className="btn flex flex-wrap justify-around my-3 gap-3">
-                            <button onClick={() => {
-                                Navigate('/admin/products/addproduct')
-                            }} className=' bg-yellow w-full h-10 hover:bg-[#e4be42]'>Add product</button>
+                        <div className="btn flex flex-wrap items-center justify-between my-3 gap-3">
+                            <h2 className="text-2xl font-bold text-center">All Users</h2>
+                            <input className='h-10 border outline-none focus:outline-none px-2 w-72' onChange={(e) => {
+                                setSearchTerm(e.target.value)
+                            }} placeholder='search email or name ' type="search" name="email" id="email" />
                         </div>
-                        {products.length > 0 ? <div className="flex w-full my-10">
+                        {allUsers.length > 0 ? <div className="flex w-full my-10">
                             <TableContainer component={Paper}>
                                 <Table sx={{ minWidth: 900 }} aria-label="customized table">
                                     <TableHead>
                                         <TableRow>
                                             <StyledTableCell width={200} align="center">Image</StyledTableCell>
                                             <StyledTableCell align="center">Name</StyledTableCell>
-                                            <StyledTableCell align="center">Description</StyledTableCell>
-                                            <StyledTableCell align="center">Category</StyledTableCell>
-                                            <StyledTableCell align="center">Price</StyledTableCell>
-                                            <StyledTableCell align="center">Rating</StyledTableCell>
+                                            <StyledTableCell align="center">email</StyledTableCell>
                                             <StyledTableCell align="center">Update</StyledTableCell>
                                             <StyledTableCell align="center">Delete</StyledTableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
-                                        {products.map((it) => (
+                                        {(searchTerm ?
+                                            allUsers.filter((it) => it?.name?.toLowerCase().includes(searchTerm?.toLowerCase()) || it?.email?.toLowerCase().includes(searchTerm?.toLowerCase()))
+                                            : allUsers
+                                        ).map((it) => (
                                             <StyledTableRow key={it._id}>
                                                 <StyledTableCell sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }} component="th" scope="row">
                                                     <img className='w-52' src={`${import.meta.env.VITE_SOME_URL}/Uploads/${it.image}`} alt="" />
                                                 </StyledTableCell>
-                                                <StyledTableCell align="center">{it.title}</StyledTableCell>
-                                                <StyledTableCell align="center">{it?.description?.slice(0, 50)}...</StyledTableCell>
-                                                <StyledTableCell align="center">{it.category}</StyledTableCell>
-                                                <StyledTableCell align="center">${it.price}</StyledTableCell>
-                                                <StyledTableCell align="center">
-                                                    <Rating name="read-only" value={it?.rating} readOnly />
-                                                </StyledTableCell>
-
+                                                <StyledTableCell align="center">{it.name}</StyledTableCell>
+                                                <StyledTableCell align="center">{it.email}</StyledTableCell>
                                                 <StyledTableCell align="center">
                                                     <button onClick={() => {
-                                                        Navigate(`/admin/product/edit-product/${it._id}`)
-                                                    }} className='bg-green-700 text-white font-semibold hover:bg-green-800 px-5 h-10'>Update</button>
+                                                        handleBlockUser(it._id)
+                                                    }} className={`bg-green-700 w-[100px] ${it?.isBlock === true ? 'bg-black text-white' : 'bg-yellow text-white'} text-white font-semibold px-5 h-10`}>{it?.isBlock === true ? 'Unblock' : 'Block'}</button>
                                                 </StyledTableCell>
                                                 <StyledTableCell align="center">
                                                     <button onClick={() => {
                                                         handleClickOpen()
-                                                        setDeleteProductId(it._id)
-                                                        setDeleteProductName(it.title)
+                                                        setdeleteUserId(it._id)
+                                                        setDeleteUserName(it.name)
                                                     }} className='bg-red-700 text-white font-semibold hover:bg-red-800 px-5 h-10'>Delete</button>
                                                 </StyledTableCell>
                                             </StyledTableRow>
@@ -124,17 +129,13 @@ const Products = () => {
                                     </TableBody>
                                 </Table>
                             </TableContainer>
-                        </div> :
-                            <div className='flex flex-col my-10'>
-                                <h3 className="text-center text-xl font-bold">No Product Found</h3>
-                                <Link className='text-red-600 my-5 text-center bg-slate-400 py-2' to={'/admin/products/addproduct'}>Add To product</Link>
-                            </div>}
+                        </div> : <Loading />}
                     </div>
                 </div>
             </div>
-            <DialogDelProduct open={open} handleClose={handleClose} deleteproductId={deleteproductId} DeleteProductName={DeleteProductName} />
+            <DialogDelUser open={open} handleClose={handleClose} deleteUserId={deleteUserId} DeleteUserName={DeleteUserName} />
         </>
     );
 }
 
-export default Products;
+export default Audience;

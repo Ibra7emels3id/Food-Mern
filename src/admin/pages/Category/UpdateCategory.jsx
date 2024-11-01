@@ -1,19 +1,25 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import Header from '../../components/Header';
 import { useDispatch, useSelector } from 'react-redux';
 import { AddProductCart, fetchProducts } from '../../../features/ProductSlice';
 import { Rating } from '@mui/material';
-import { AddToCategory } from '../../../features/CategorySlice';
-import { useNavigate } from 'react-router-dom';
+import { AddToCategory, FetchCategory, UpdateCategoryId } from '../../../features/CategorySlice';
+import { useNavigate, useParams } from 'react-router-dom';
 
-const AddCategory = () => {
+const UpdateCategory = () => {
+    const { id } = useParams()
     const dispatch = useDispatch();
     const Navigator = useNavigate()
     const [imageUrl, setImageUrl] = useState(null);
-    const [product, setProduct] = useState({
-        category: '',
-        image: '',
-    })
+    const { category } = useSelector((state) => state.category)
+    const [product, setProduct] = useState({})
+
+
+    const Categ = useMemo(() => {
+        return category.find((it) => it._id === id);
+    }, [category, id]);
+
+
 
     // handle Change event
     const handleInputChange = (e) => {
@@ -27,19 +33,25 @@ const AddCategory = () => {
             const formData = new FormData();
             formData.append('category', product.category);
             formData.append('image', product.image);
-            const response = await dispatch(AddToCategory({ formData })).unwrap();
-            if (response && response.message === 'Category added successfully') {
-                setProduct({ category: '', image: '' });
-                Navigator('/admin/category')
-            }
+            await dispatch(UpdateCategoryId({ id, formData })).unwrap();
+            Navigator('/admin/category')
         } catch (error) {
             console.error('Failed to add product:', error);
         }
     }
 
 
-    console.log(product);
+    useEffect(() => {
+        if (Categ) {
+            setProduct(Categ)
+        }
+    }, [Categ])
 
+
+
+    useEffect(() => {
+        dispatch(FetchCategory());
+    }, [id])
 
 
     return (
@@ -48,9 +60,9 @@ const AddCategory = () => {
                 <Header />
                 <div className="flex w-full ml-[50px] md:ml-[250px] mt-[70px] p-2 md:p-12">
                     <div className="flex flex-col w-full md:w-[80%] m-auto">
-                        <h2 className="text-2xl font-bold text-center mb-4">Add Category</h2>
+                        <h2 className="text-2xl font-bold text-center mb-4">Update Category</h2>
                         <form onSubmit={handleSubmit} className='w-full'>
-                            <input onChange={handleInputChange} className='h-12 px-3 w-full outline-none focus:outline-none border' type="text" name="category" id="category" placeholder='Enter your category' />
+                            <input value={product?.category} onChange={handleInputChange} className='h-12 px-3 w-full outline-none focus:outline-none border' type="text" name="category" id="category" placeholder='Enter your category' />
                             <label
                                 htmlFor="uploadFile1"
                                 className="flex bg-gray-800 hover:bg-gray-700 w-full text-white text-base px-5 py-3 outline-none mt-4 cursor-pointer mx-auto font-[sans-serif]"
@@ -76,9 +88,9 @@ const AddCategory = () => {
                                 }} type="file" id="uploadFile1" className="hidden" />
                             </label>
                             <div className="image flex items-center justify-center">
-                                {imageUrl && <img className='mt-4 w-52 ' src={URL.createObjectURL(imageUrl)} alt="Uploaded Image" />}
+                                {imageUrl ? <img className='mt-4 w-52 ' src={URL.createObjectURL(imageUrl)} alt="Uploaded Image" /> : <img className='mt-4 w-52 ' src={`${import.meta.env.VITE_SOME_URL}/Uploads/${product?.image}`} alt="Uploaded Image" />}
                             </div>
-                            <button type='submit' className='w-full h-12 px-6 text-white text-base font-semibold bg-yellow hover:bg-[#dbaa2c] rounded-md mt-8'>Add Category</button>
+                            <button type='submit' className='w-full h-12 px-6 text-white text-base font-semibold bg-yellow hover:bg-[#dbaa2c] rounded-md mt-8'>Update Category</button>
                         </form>
                     </div>
                 </div>
@@ -87,4 +99,4 @@ const AddCategory = () => {
     );
 }
 
-export default AddCategory;
+export default React.memo(UpdateCategory);

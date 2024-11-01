@@ -39,6 +39,18 @@ export const AddProductCart = createAsyncThunk('AddProductCart', async ({ formDa
     }
 });
 
+// Update Product
+export const UpdateProductId = createAsyncThunk('UpdateProductId', async ({ id, formData }) => {
+    console.log(id, formData);
+    try {
+        await axios.put(`${import.meta.env.VITE_SOME_URL}/api/product/update/${id}`, formData);
+        toast.success('Product updated successfully')
+    } catch (error) {
+        console.error('Error updating product:', error);
+        throw error;
+    }
+});
+
 // Delete Product
 export const DeleteProduct = createAsyncThunk('DeleteProduct', async ({deleteproductId})=>{
     console.log(deleteproductId);
@@ -87,6 +99,20 @@ const ProductSlice = createSlice({
             state.products.push(action.payload);
         });
         builder.addCase(AddProductCart.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.error.message;
+        });
+
+        // Update Product
+        builder.addCase(UpdateProductId.pending, (state, action) => {
+            state.loading = true;
+            state.error = null;
+        });
+        builder.addCase(UpdateProductId.fulfilled, (state, action) => {
+            state.loading = false;
+            state.products = state.products.map(product => product._id === action.payload._id? action.payload : product);
+        });
+        builder.addCase(UpdateProductId.rejected, (state, action) => {
             state.loading = false;
             state.error = action.error.message;
         });

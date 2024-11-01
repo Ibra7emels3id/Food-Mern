@@ -10,6 +10,8 @@ const register = () => {
     const Navigate = useNavigate()
     const User = true
     const [loading, setLoading] = useState(false)
+    const [CheckPass, setCheckPass] = useState('password')
+    const [checked , setChecked] = useState('checkbox')
     const [data, setData] = useState({
         name: '',
         email: '',
@@ -36,11 +38,13 @@ const register = () => {
                 body: JSON.stringify(data),
             })
             const json = await response.json()
-            if(json.status === 201) {
+            if (json.status === 201) {
                 toast.success('User Registration Successful')
                 setData({ name: '', email: '', password: '' })
-            }else{
-                toast.error('Failed to Register User')
+            } else {
+                // toast.error('Failed to Register User')
+                console.log(json.message)
+                setLoading(false)
             }
             Navigate('/login')
         } catch (error) {
@@ -72,13 +76,13 @@ const register = () => {
                 <div className="bg-gray-50 font-[sans-serif]">
                     <div className="min-h-screen flex flex-col items-center justify-center py-6 px-4">
                         <div className="max-w-md w-full">
-                            <Link to="/">
+                            {<Link to="/">
                                 <img
                                     src="https://themewagon.github.io/FoodMart/images/logo.png"
                                     alt="logo"
                                     className="w-40 mb-8 mx-auto block"
                                 />
-                            </Link>
+                            </Link> || ''}
                             <div className="p-8 rounded-2xl bg-white shadow">
                                 <h2 className="text-gray-800 text-center text-2xl font-bold">
                                     Sign Up
@@ -94,7 +98,7 @@ const register = () => {
                                                 name="name"
                                                 type="name"
                                                 required="true"
-                                                className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                                                className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-yellow"
                                                 placeholder="Enter Your name"
                                             />
                                             <svg
@@ -122,7 +126,7 @@ const register = () => {
                                                 name="email"
                                                 type="email"
                                                 required="true"
-                                                className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                                                className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-yellow"
                                                 placeholder="Enter Your Email"
                                             />
                                             <svg
@@ -146,12 +150,19 @@ const register = () => {
                                             <input
                                                 onChange={handleChange}
                                                 name="password"
-                                                type="password"
+                                                type={CheckPass}
                                                 required="true"
-                                                className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-blue-600"
+                                                className="w-full text-gray-800 text-sm border border-gray-300 px-4 py-3 rounded-md outline-yellow"
                                                 placeholder="Enter Your password"
                                             />
                                             <svg
+                                                onClick={() => {
+                                                    if (CheckPass === 'password') {
+                                                        setCheckPass('text')
+                                                    } else {
+                                                        setCheckPass('password')
+                                                    }
+                                                }}
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 fill="#bbb"
                                                 stroke="#bbb"
@@ -168,11 +179,13 @@ const register = () => {
                                     <div className="flex flex-wrap items-center justify-between gap-4">
                                         <div className="flex items-center">
                                             <input
-                                                onChange={handleChange}
+                                                onChange={(e)=>{
+                                                    console.log(e);
+                                                }}
                                                 id="remember-me"
                                                 name="remember-me"
-                                                type="checkbox"
-                                                className="h-4 w-4 shrink-0 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                                                type='checkbox'
+                                                className="h-4 w-4 shrink-0 text-yellow focus:ring-yellow border-gray-300 rounded"
                                             />
                                             <label
                                                 htmlFor="remember-me"
@@ -186,23 +199,23 @@ const register = () => {
                                     </div>
                                     <div className="!mt-8">
                                         {loading ? <p
-                                            className="w-full py-3 px-4 text-sm tracking-wide rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none"
+                                            className="w-full py-3 px-4 text-sm tracking-wide rounded-lg text-white bg-yellow hover:bg-orange focus:outline-none"
                                         >
                                             Loading...
                                         </p> : <button
                                             type="submit"
-                                            className="w-full py-3 px-4 text-sm tracking-wide rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none"
+                                            className="w-full py-3 px-4 text-sm tracking-wide rounded-lg text-white bg-yellow hover:bg-orange focus:outline-none"
                                         >
-                                            Sign in
+                                            Register
                                         </button>}
                                     </div>
                                     <p className="text-gray-800 text-sm !mt-8 text-center">
                                         Dont have an account?{" "}
                                         <Link
-                                            to="/register"
+                                            to="/login"
                                             className="text-blue-600 hover:underline ml-1 whitespace-nowrap font-semibold"
                                         >
-                                            Register here
+                                            Sign in  here
                                         </Link>
                                     </p>
                                 </form>

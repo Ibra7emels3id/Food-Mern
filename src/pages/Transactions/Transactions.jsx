@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../../Components/Header';
 import Footer from '../../Components/Footer';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,38 +8,29 @@ import { Dialog, Paper, Rating, styled, Table, TableBody, TableCell, tableCellCl
 import Loading from '../../Components/Loading';
 
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-    [`&.${tableCellClasses.head}`]: {
-        backgroundColor: theme.palette.common.black,
-        color: theme.palette.common.white,
-    },
-    [`&.${tableCellClasses.body}`]: {
-        fontSize: 14,
-    },
-}));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    '&:nth-of-type(odd)': {
-        backgroundColor: theme.palette.action.hover,
-    },
-    // hide last border
-    '&:last-child td, &:last-child th': {
-        border: 0,
-    },
-}));
-
-
 const Transactions = () => {
     const dispatch = useDispatch();
     const Navigate = useNavigate();
+    const [stateDetails, setStateDetails] = useState('hidden')
+    const [StateDetailsId, setStateDetailsId] = useState(null);
     const { cartPayment } = useSelector((state) => state.cartPay);
-    const { user , sLoading } = useSelector((state) => state.user);
+    const { user, sLoading } = useSelector((state) => state.user);
     const sortedCartPayment = Array.isArray(cartPayment)
         ? [...cartPayment].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
         : [];
 
+    // hANDLE state details
+    const handleStateDetails = (id) => {
+        if (StateDetailsId === id) {
+            setStateDetailsId(null);
+        } else {
+            setStateDetailsId(id);
+        }
+        setStateDetails('flex');
+    };
 
-    console.log(user?.user);
+
+    console.log(sortedCartPayment);
 
 
     // UseEffect
@@ -52,7 +43,7 @@ const Transactions = () => {
     if (!sLoading && !user?.user) {
         Navigate('/');
     }
-    
+
 
 
     // Loading
@@ -60,74 +51,79 @@ const Transactions = () => {
         return <Loading />
     };
 
-    // if (user?.user) {
-        return (
-            <>
-                <Header />
+
+    return (
+        <>
+            <Header />
+            <div className="flex flex-col overflow-auto">
                 <div className="title mt-10 mx-4 ">
                     <span className="flex items-center">
-                        <span className="pr-6 text-2xl">Transaction</span>
+                        <span className="pr-6 text-2xl">Orders</span>
                         <span className="h-px flex-1 bg-black"></span>
                     </span>
                 </div>
-                <div className="table w-full px-3">
-                    {sortedCartPayment?.length > 0 ? <div className="flex w-full my-10">
-                        <TableContainer component={Paper}>
-                            <Table sx={{ minWidth: 900 }} aria-label="customized table">
-                                <TableHead>
-                                    <TableRow>
-                                        <StyledTableCell align="center">Payment ID</StyledTableCell>
-                                        <StyledTableCell align="center">Name</StyledTableCell>
-                                        <StyledTableCell align="center">Total</StyledTableCell>
-                                        <StyledTableCell align="center">Currency</StyledTableCell>
-                                        <StyledTableCell align="center">Product</StyledTableCell>
-                                        <StyledTableCell align="center">Date</StyledTableCell>
-                                        <StyledTableCell align="center">phone</StyledTableCell>
-                                        <StyledTableCell align="center">state</StyledTableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody className='overflow-auto'>
-                                    {sortedCartPayment?.map((it) => (
-                                        <StyledTableRow key={it._id}>
-                                            <StyledTableCell>
-                                                #{it?.paymentId?.slice(0, 10)}
-                                            </StyledTableCell>
-                                            <StyledTableCell align="center">{it.name}</StyledTableCell>
-                                            <StyledTableCell align="center">${it?.subTotal}</StyledTableCell>
-                                            <StyledTableCell align="center">{it?.currency}</StyledTableCell>
-                                            <StyledTableCell align="center">
-                                                {it?.items?.map((e) => {
-                                                    return (
-                                                        <div key={e._id}>
-                                                            <h3>{e.title}</h3>
-                                                            <p>{e.quantity}</p>
-                                                            <Link to={`/product/details/${e._id}`}>View</Link>
-                                                        </div>
-
-                                                    )
-                                                })}
-                                            </StyledTableCell>
-                                            <StyledTableCell align="center">{new Date(it?.date).toLocaleDateString()}<br />{it?.time?.toLocaleString()}</StyledTableCell>
-                                            <StyledTableCell align="center">{it.phone}</StyledTableCell>
-                                            <StyledTableCell align="center">
-                                                {it.status === 'pending' ? <p className='bg-red-700 text-white h-12 flex items-center justify-center rounded-xl'>{it.status}...</p> : <p className='bg-yellow text-white h-12 flex items-center justify-center rounded-xl'>{it.status}</p>}
-                                            </StyledTableCell>
-                                        </StyledTableRow>
-                                    ))}
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
+                <div className="table w-full px-3 ">
+                    {sortedCartPayment?.length > 0 ? <div className="flex  flex-col gap-5 my-10">
+                        {sortedCartPayment.map((item) => {
+                            return (
+                                <div key={item._id} className="border min-w-[1200px]  border-yellow md:w-[90%] m-auto p-4">
+                                    <div className=" flex  justify-between m-auto w-full items-center">
+                                        <div className="flex flex-col gap-3">
+                                            <span className="text-sm font-bold">Order ID: {item?.paymentId?.slice(0, 15)}...</span>
+                                            <p className="text-sm font-bold flex items-center justify-center">Payment Method: <span className='bg-green-600 ml-2 flex items-center justify-center text-white w-[50px] h-6 rounded-3xl'>Paid</span> </p>
+                                        </div>
+                                        <div className="flex flex-col gap-3">
+                                            <span className="text-sm font-bold">Currency: {item.currency}</span>
+                                            <span className="text-sm font-bold">Total Amount: {item.subTotal}</span>
+                                        </div>
+                                        <div className="flex flex-col gap-3">
+                                            <span className="text-sm font-bold">Quantity: {item?.items?.length}</span>
+                                            <span className="text-sm font-bold">Order Date: {item.createdAt}</span>
+                                        </div>
+                                        <div className="flex  gap-3">
+                                            <p className="text-sm flex items-center font-bold">Status: <span className={`${item.status.toLowerCase() === 'pending' && 'bg-yellow'} ${item.status.toLowerCase() === 'out for delivery' && 'bg-lime-900'} ${item.status.toLowerCase() === 'complete' && 'bg-green-600'} ${item.status === 'pending' && 'bg-yellow'} w-[130px] ml-2 text-white rounded-3xl h-8 flex items-center justify-center`}>{item.status}</span></p>
+                                        </div>
+                                        <div className="flex flex-col items-center justify-center px-2 gap-3">
+                                            <button onClick={() => {
+                                                handleStateDetails(item._id)
+                                            }} className='border border-black font-normal text-xl w-[100px] rounded-xl hover:bg-black hover:text-white h-10'>Details</button>
+                                        </div>
+                                    </div>
+                                    <div className={`${StateDetailsId == item._id ? 'flex' : 'hidden'}  transform transition duration-1000 ease flex-col mt-12 border-t-2 p-3`}>
+                                        <h2 className='font-bold my-4 text-2xl'>Order Items</h2>
+                                        {item.items.map((it) => {
+                                            return (
+                                                <div key={it._id} className="flex items-center justify-between w-full my-2 p-3 border-y-2">
+                                                    <div className="flex gap-3">
+                                                        <img className='w-[130px] h-[130px]' src={`${import.meta.env.VITE_SOME_URL}/Uploads/${it.image}`} alt={it.title} />
+                                                    </div>
+                                                    <div className="flex flex-col gap-3">
+                                                        <p className="text-sm font-bold">Customer Name: {it.title}</p>
+                                                        <p className="text-sm font-bold">Quantity: {it.quantity}</p>
+                                                    </div>
+                                                    <div className="flex flex-col gap-3">
+                                                        <p className="text-sm font-bold">Price: {it.price}$</p>
+                                                    </div>
+                                                    <div className="flex gap-3 px-4">
+                                                        <p className="text-sm font-bold">SubTotal: {it.quantity * it.price}$</p>
+                                                    </div>
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
+                                </div>
+                            )
+                        })}
                     </div> :
                         <div className='flex flex-col my-10'>
                             <h3 className="text-center text-xl font-bold">Not Order Payment </h3>
                             <Link to={'/shop'}>Order Now</Link>
                         </div>}
                 </div>
-                <Footer />
-            </>
-        );
-    // }
-    // return null;
+            </div>
+            <Footer />
+        </>
+    );
 }
 
 export default Transactions;

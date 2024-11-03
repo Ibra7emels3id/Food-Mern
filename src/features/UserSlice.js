@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 export const fetchUser = createAsyncThunk('fetchUser', async () => {
     const token = localStorage.getItem('token');
     try {
-        const res = await axios.get('http://localhost:3000/api/user', {
+        const res = await axios.get(`${import.meta.env.VITE_SOME_URL}/api/user`, {
             headers: {
                 Authorization: token ? `Bearer ${token}` : '',
             },

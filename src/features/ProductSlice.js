@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 
 export const fetchProducts = createAsyncThunk('fetchProducts', async () => {
     try {
-        const response = await axios.get('http://localhost:3000/api/products')
+        const response = await axios.get(`${import.meta.env.VITE_SOME_URL}/api/products`)
         // console.log(response.data);
         return response.data;
     } catch (error) {
@@ -16,7 +16,7 @@ export const fetchProducts = createAsyncThunk('fetchProducts', async () => {
 // Details Product
 export const fetchProductDetails = createAsyncThunk('fetchProductDetails', async (id) => {
     try {
-        const response = await axios.get(`http://localhost:3000/api/products/details/${id}`)
+        const response = await axios.get(`${import.meta.env.VITE_SOME_URL}/api/products/details/${id}`)
         // console.log(response.data);
         return response.data;
     } catch (error) {
@@ -29,7 +29,7 @@ export const fetchProductDetails = createAsyncThunk('fetchProductDetails', async
 export const AddProductCart = createAsyncThunk('AddProductCart', async ({ formData }) => {
     console.log(formData);
     try {
-        const response = await axios.post('http://localhost:3000/api/products', formData);
+        const response = await axios.post(`${import.meta.env.VITE_SOME_URL}/api/products`, formData);
         // console.log(response.data);
         toast.success('Product added successfully')
         return response.data;
@@ -55,7 +55,7 @@ export const UpdateProductId = createAsyncThunk('UpdateProductId', async ({ id, 
 export const DeleteProduct = createAsyncThunk('DeleteProduct', async ({deleteproductId})=>{
     console.log(deleteproductId);
     try {
-        await axios.delete(`http://localhost:3000/api/products/delete/${deleteproductId}`);
+        await axios.delete(`${import.meta.env.VITE_SOME_URL}/api/products/delete/${deleteproductId}`);
         toast.success('Delete product successfully')
     } catch (error) {
         console.error('Error deleting products:', error);

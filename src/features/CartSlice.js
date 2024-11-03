@@ -7,7 +7,7 @@ export const AddToCart = createAsyncThunk('AddToCart', async ({ item }, thunkAPI
     const state = thunkAPI.getState();
     const userId = state?.user.user.user?._id;
     try {
-        const response = await axios.post('http://localhost:3000/api/cart', { userId, item });
+        const response = await axios.post(`${import.meta.env.VITE_SOME_URL}/api/cart`, { userId, item });
         toast.success('add Cart success', {
             position: "bottom-center",
             autoClose: 2000,
@@ -26,7 +26,7 @@ export const RemoveFromCart = createAsyncThunk('RemoveFromCart', async ({ item }
     const state = thunkAPI.getState();
     const userId = state?.user.user.user?._id;
     try {
-        const response = await axios.post('http://localhost:3000/api/cart-remove', { userId, item });
+        const response = await axios.post(`${import.meta.env.VITE_SOME_URL}/api/cart-remove`, { userId, item });
         console.log(response.data);
         toast.warning('Remove Cart success',{
             position: "bottom-center",
@@ -48,7 +48,7 @@ export const fetchCartProduct = createAsyncThunk('fetchCartProduct', async (_, {
     const userId = state?.user.user.user?._id;
     if (!userId) throw new Error("User ID not found");
     try {
-        const response = await axios.get('http://localhost:3000/api/cart', {
+        const response = await axios.get(`${import.meta.env.VITE_SOME_URL}/api/cart`, {
             params: { userId }
         });
         // console.log(response.data);
@@ -65,7 +65,7 @@ export const RemoveCartItem = createAsyncThunk('RemoveCartItem', async ({ item }
     const state = thunkAPI.getState();
     const userId = state?.user.user.user?._id;
     try {
-        const response = await axios.put('http://localhost:3000/api/cart-delete-item', { userId, item });
+        const response = await axios.put(`${import.meta.env.VITE_SOME_URL}/api/cart-delete-item`, { userId, item });
         toast.success('Item removed from Cart successfully');
         return response.data;
     } catch (error) {

@@ -26,7 +26,7 @@ const Login = () => {
         e.preventDefault()
         setLoading(true)
         try {
-            const res = await axios.post('http://localhost:3000/api/users/login', data)
+            const res = await axios.post(`${import.meta.env.VITE_SOME_URL}/api/users/login`, data)
             if (res.status === 200) {
                 toast.success(res.data.message)
                 localStorage.setItem('token', res.data.token)

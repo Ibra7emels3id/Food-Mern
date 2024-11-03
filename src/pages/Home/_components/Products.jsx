@@ -57,16 +57,6 @@ const Products = () => {
                         )}
                     </div>
                 </div>
-                <div className=" hidden boxView w-[90%] mt-1 absolute top-2  items-center justify-between">
-                    <div className="flex w-[100%] m-auto justify-between items-center">
-                        <Link to={`/product/details/${item._id}`} className="text-sm text-blue-500 hover:text-blue-700">
-
-                        </Link>
-                        <div >
-                            <button className='bg-white p-4 rounded-full'>👍</button>
-                        </div>
-                    </div>
-                </div>
             </div>
         );
     });
@@ -75,15 +65,12 @@ const Products = () => {
         dispatch(fetchProducts());
     }, [dispatch, userId, cart]);
 
-    // if (isLoading) {
-    //     return <p>Loading...</p>;
-    // }
 
     return (
         <div className="p-5 md:p-10">
             <div className="title flex justify-between items-center">
-                <h3 className='font-bold text-3xl'>Trending Products</h3>
-                <Link className='text-light hover:text-black'>View All Products <ArrowForwardIcon /></Link>
+                <h3 className='font-bold text-sm md:text-3xl uppercase'>All Products</h3>
+                <Link to={'/shop'} id='shop' className='text-light hover:text-black'>View All Products <ArrowForwardIcon /></Link>
             </div>
             <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  xl:grid-cols-5 my-20 gap-5">
                 {Items}

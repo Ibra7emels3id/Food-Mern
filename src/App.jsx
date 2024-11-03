@@ -97,13 +97,11 @@ function App() {
                     <Route path="/admin/products/addproduct" element={<AddProduct UserData={user} />} />
                     <Route path="/admin/products" element={<Products UserData={user} />} />
                     <Route path="/admin/category" element={<Category UserData={user} />} />
-                    <Route path="/admin/category/add-category" element={<AddCategory/>} />
-                    <Route path="/admin/category/edit-category/:id" element={<UpdateCategory/>} />
-                    <Route path="/admin/audience" element={<Audience/>} />
-                    <Route path="/admin/order" element={<Order/>} />
+                    <Route path="/admin/category/add-category" element={<AddCategory />} />
+                    <Route path="/admin/category/edit-category/:id" element={<UpdateCategory />} />
+                    <Route path="/admin/audience" element={<Audience />} />
+                    <Route path="/admin/order" element={<Order />} />
                     <Route path="/admin/product/edit-product/:id" element={<UpdateProduct />} />
-
-                    
                 </Routes>
             </BrowserRouter>
         </>

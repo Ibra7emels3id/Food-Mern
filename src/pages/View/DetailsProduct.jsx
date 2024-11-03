@@ -54,6 +54,7 @@ const DetailsProduct = () => {
                     <div className="lg:col-span-3 h-full p-8">
                         <div className="relative h-full flex items-center justify-center lg:min-h-[580px]">
                             <img
+                                loading='lazy'
                                 src={`${import.meta.env.VITE_SOME_URL}/Uploads/${Product?.image}`}
                                 alt="Product"
                                 className="lg:w-3/5 w-3/4 h-full object-contain max-lg:p-8"
@@ -86,6 +87,7 @@ const DetailsProduct = () => {
                                     className="bg-gray-100 w-10 h-9 font-semibold flex items-center justify-center"
                                 >
                                     <svg
+                                        loading='lazy'
                                         xmlns="http://www.w3.org/2000/svg"
                                         className="w-3 fill-current inline"
                                         viewBox="0 0 124 124"
@@ -109,6 +111,7 @@ const DetailsProduct = () => {
                                     className="bg-gray-800 text-white w-10 h-9 font-semibold flex items-center justify-center"
                                 >
                                     <svg
+                                        loading='lazy'
                                         xmlns="http://www.w3.org/2000/svg"
                                         className="w-3 fill-current inline"
                                         viewBox="0 0 42 42"
@@ -139,6 +142,7 @@ const DetailsProduct = () => {
                         </div>
                         <div className="flex flex-wrap items-center text-sm text-gray-800 mt-8">
                             <svg
+                                loading='lazy'
                                 xmlns="http://www.w3.org/2000/svg"
                                 className="fill-current w-6 mr-3"
                                 viewBox="0 0 48 48"
@@ -162,6 +166,7 @@ const DetailsProduct = () => {
                     <ul className="grid sm:grid-cols-2 gap-3 mt-4">
                         <li className="flex items-center text-sm text-gray-600">
                             <svg
+                                loading='lazy'
                                 xmlns="http://www.w3.org/2000/svg"
                                 width={17}
                                 className="mr-4 bg-green-500 fill-white rounded-full p-[3px]"
@@ -176,6 +181,7 @@ const DetailsProduct = () => {
                         </li>
                         <li className="flex items-center text-sm text-gray-600">
                             <svg
+                                loading='lazy'
                                 xmlns="http://www.w3.org/2000/svg"
                                 width={17}
                                 className="mr-4 bg-green-500 fill-white rounded-full p-[3px]"
@@ -190,6 +196,7 @@ const DetailsProduct = () => {
                         </li>
                         <li className="flex items-center text-sm text-gray-600">
                             <svg
+                                loading='lazy'
                                 xmlns="http://www.w3.org/2000/svg"
                                 width={17}
                                 className="mr-4 bg-green-500 fill-white rounded-full p-[3px]"
@@ -204,6 +211,7 @@ const DetailsProduct = () => {
                         </li>
                         <li className="flex items-center text-sm text-gray-600">
                             <svg
+                                loading='lazy'
                                 xmlns="http://www.w3.org/2000/svg"
                                 width={17}
                                 className="mr-4 bg-green-500 fill-white rounded-full p-[3px]"
@@ -218,6 +226,7 @@ const DetailsProduct = () => {
                         </li>
                         <li className="flex items-center text-sm text-gray-600">
                             <svg
+                                loading='lazy'
                                 xmlns="http://www.w3.org/2000/svg"
                                 width={17}
                                 className="mr-4 bg-green-500 fill-white rounded-full p-[3px]"
@@ -232,6 +241,7 @@ const DetailsProduct = () => {
                         </li>
                         <li className="flex items-center text-sm text-gray-600">
                             <svg
+                                loading='lazy'
                                 xmlns="http://www.w3.org/2000/svg"
                                 width={17}
                                 className="mr-4 bg-green-500 fill-white rounded-full p-[3px]"

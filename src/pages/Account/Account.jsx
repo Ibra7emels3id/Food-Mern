@@ -79,7 +79,7 @@ const Account = () => {
                 <div className="flex flex-col items-center w-full mt-10">
                     <form action="" className='w-full flex flex-col items-center'>
                         <div className="image">
-                            {ImageUrl ? <img className='w-[170px] rounded-full' src={URL.createObjectURL(ImageUrl)} alt="Profile Picture" /> : <img className='w-[170px] rounded-full' src={`${import.meta.env.VITE_SOME_URL}/Uploads/${UserData?.image}`} alt="Profile Picture" />}
+                            {ImageUrl ? <img loading='lazy' className='w-[170px] rounded-full' src={URL.createObjectURL(ImageUrl)} alt="Profile Picture" /> : <img loading='lazy' className='w-[170px] rounded-full' src={`${import.meta.env.VITE_SOME_URL}/Uploads/${UserData?.image}`} alt="Profile Picture" />}
                         </div>
                         <div className="flex mt-6">
                             <Button
@@ -92,6 +92,7 @@ const Account = () => {
                                 startDecorator={
                                     <SvgIcon>
                                         <svg
+                                            loading='lazy'
                                             xmlns="http://www.w3.org/2000/svg"
                                             fill="none"
                                             viewBox="0 0 24 24"

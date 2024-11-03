@@ -5,7 +5,6 @@ import { Elements, CardElement, useStripe, useElements } from '@stripe/react-str
 import { loadStripe } from '@stripe/stripe-js';
 import { toast } from 'react-toastify';
 import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
 import { useSelector } from 'react-redux';
 
 
@@ -20,9 +19,7 @@ const CheckoutForm = () => {
     const [isLoading, setIsLoading] = React.useState(false);
     const stripe = useStripe();
     const elements = useElements();
-    const [clientSecret2, setClientSecret2] = React.useState(null);
     const navegate = useNavigate();
-    const [errorMessage, setErrorMessage] = React.useState('');
     const { user } = useSelector((state) => state.user)
     const { cart } = useSelector(state => state.cart);
     const [dataPayment, setDataPayment] = React.useState({
@@ -118,11 +115,13 @@ const CheckoutForm = () => {
                                             alt="card1"
                                         />
                                         <img
+                                            loading='lazy'
                                             src="https://readymadeui.com/images/american-express.webp"
                                             className="w-12"
                                             alt="card2"
                                         />
                                         <img
+                                            loading='lazy'
                                             src="https://readymadeui.com/images/master.webp"
                                             className="w-12"
                                             alt="card3"
@@ -175,7 +174,7 @@ const CheckoutForm = () => {
                                     {isLoading ? <p
                                         className="px-7 w-full py-2 text-sm tracking-wide bg-yellow text-white rounded-md"
                                     >
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="w-8 animate-spin fill-white  block mx-auto"
+                                        <svg loading='lazy' xmlns="http://www.w3.org/2000/svg" className="w-8 animate-spin fill-white  block mx-auto"
                                             viewBox="0 0 24 24">
                                             <path
                                                 d="M12 22c5.421 0 10-4.579 10-10h-2c0 4.337-3.663 8-8 8s-8-3.663-8-8c0-4.336 3.663-8 8-8V2C6.579 2 2 6.58 2 12c0 5.421 4.579 10 10 10z"
@@ -185,7 +184,7 @@ const CheckoutForm = () => {
                                         type="submit"
                                         className="px-7 w-full py-3.5 text-sm tracking-wide bg-yellow text-white rounded-md"
                                     >
-                                        Payment 
+                                        Payment
                                     </button>}
                                 </div>
                             </form>

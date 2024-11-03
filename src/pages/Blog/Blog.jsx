@@ -16,6 +16,7 @@ const Blog = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-sm:gap-8 my-16">
                         <div className="bg-white rounded overflow-hidden">
                             <img
+                                loading='lazy'
                                 src="https://readymadeui.com/images/food.webp"
                                 alt="Blog Post 1"
                                 className="w-full h-52 object-cover"
@@ -41,6 +42,7 @@ const Blog = () => {
                         </div>
                         <div className="bg-white rounded overflow-hidden">
                             <img
+                                loading='lazy'
                                 src="https://readymadeui.com/images/food11.webp"
                                 alt="Blog Post 2"
                                 className="w-full h-52 object-cover"
@@ -66,6 +68,7 @@ const Blog = () => {
                         </div>
                         <div className="bg-white rounded overflow-hidden">
                             <img
+                                loading='lazy'
                                 src="https://readymadeui.com/images/food22.webp"
                                 alt="Blog Post 3"
                                 className="w-full h-52 object-cover"
@@ -91,6 +94,7 @@ const Blog = () => {
                         </div>
                         <div className="bg-white rounded overflow-hidden">
                             <img
+                                loading='lazy'
                                 src="https://readymadeui.com/images/food33.webp"
                                 alt="Blog Post 3"
                                 className="w-full h-52 object-cover"
@@ -116,6 +120,7 @@ const Blog = () => {
                         </div>
                         <div className="bg-white rounded overflow-hidden">
                             <img
+                                loading='lazy'
                                 src="https://readymadeui.com/images/food44.webp"
                                 alt="Blog Post 3"
                                 className="w-full h-52 object-cover"
@@ -141,6 +146,7 @@ const Blog = () => {
                         </div>
                         <div className="bg-white rounded overflow-hidden">
                             <img
+                                loading='lazy'
                                 src="https://readymadeui.com/images/food55.webp"
                                 alt="Blog Post 3"
                                 className="w-full h-52 object-cover"

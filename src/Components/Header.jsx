@@ -1,5 +1,5 @@
 import { Avatar, Badge, Stack, styled } from '@mui/material';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCartProduct } from '../features/CartSlice';
@@ -48,7 +48,11 @@ const Header = ({ UserData }) => {
     const { cart } = useSelector((state) => state.cart)
     const { user } = useSelector((state) => state.user)
     const { category } = useSelector((state) => state.category)
+    const { products } = useSelector((state) => state.Product);
     const [dilogShow, setDilogShow] = useState('hidden');
+    const [textSearch, setTextSearch] = useState('');
+    const [searchResult, setSearchResult] = useState(false);
+    const [cartItems, setCartItems] = useState([]);
     const dropdownRef = useRef(null);
 
 
@@ -61,11 +65,11 @@ const Header = ({ UserData }) => {
         const handleClickOutside = (event) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
                 setDilogShow('hidden');
+                setSearchResult(false);
+                setTextSearch('');
             }
         };
-
         document.addEventListener('click', handleClickOutside);
-
         return () => {
             document.removeEventListener('click', handleClickOutside);
         };
@@ -78,11 +82,24 @@ const Header = ({ UserData }) => {
         window.location.href = "/";
     }
 
-
     // UseEffects
     useEffect(() => {
         dispatch(fetchCartProduct({ User }))
     }, [User]);
+
+    // handle Search Products
+    useEffect(() => {
+        if (textSearch) {
+            const filteredProducts = products.filter(product =>
+                product.title.toLowerCase().includes(textSearch.toLowerCase()) ||
+                String(product.price).includes(textSearch)
+            );
+            setCartItems(filteredProducts);
+        } else {
+            setCartItems([]);
+        }
+    }, [textSearch])
+
 
     return (
         <header ref={dropdownRef} className="shadow-md bg-white font-[sans-serif] tracking-wide relative z-50">
@@ -97,10 +114,38 @@ const Header = ({ UserData }) => {
                         <path d="m190.707 180.101-47.078-47.077c11.702-14.072 18.752-32.142 18.752-51.831C162.381 36.423 125.959 0 81.191 0 36.422 0 0 36.423 0 81.193c0 44.767 36.422 81.187 81.191 81.187 19.688 0 37.759-7.049 51.831-18.751l47.079 47.078a7.474 7.474 0 0 0 5.303 2.197 7.498 7.498 0 0 0 5.303-12.803zM15 81.193C15 44.694 44.693 15 81.191 15c36.497 0 66.189 29.694 66.189 66.193 0 36.496-29.692 66.187-66.189 66.187C44.693 147.38 15 117.689 15 81.193z"></path>
                     </svg>
                     <input
+                        onChange={(e) => {
+                            setTextSearch(e.target.value);
+                        }}
+                        onFocus={() => {
+                            setSearchResult(true);
+                        }}
+                        value={textSearch}
                         type="text"
                         placeholder="Search..."
                         className="outline-none bg-transparent w-full text-sm"
                     />
+                    {searchResult && <div className="flex flex-col absolute top-14  left-0 bg-neutral-200 w-full gap-2 p-2">
+                        <button onClick={() => {
+                            setSearchResult(false);
+                            setTextSearch('');
+                        }}><svg className='w-12 h-12' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                                <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+                            </svg></button>
+                        {cartItems.length > 0 ? cartItems?.map(product => (
+                            <div key={product._id} className="flex items-center gap-2 p-2 bg-white hover:bg-gray-100 cursor-pointer">
+                                <img
+                                    src={`${import.meta.env.VITE_SOME_URL}/Uploads/${product.image}`}
+                                    alt={product.title}
+                                    className="w-12 h-12"
+                                />
+                                <span>{product.title}</span>
+                            </div>
+                        )) :
+                            <dev>
+                                <span className='text-center py-2 block'>No search results found</span>
+                            </dev>}
+                    </div>}
                 </div>
                 <Link to="/" className="shrink-0">
                     <img

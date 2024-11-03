@@ -69,6 +69,7 @@ const Cart = () => {
                 <div className="col-span-2 flex items-center gap-4">
                     <div className="w-24 h-24 shrink-0 bg-white p-2 rounded-md">
                         <img
+                            loading='lazy'
                             src={`${import.meta.env.VITE_SOME_URL}/Uploads/${it.image}`}
                             className="w-full h-full object-contain"
                         />
@@ -92,6 +93,7 @@ const Cart = () => {
                                         HandleRemoveToCart(it)
                                     }} className=' hover:text-yellow'>
                                         <svg
+                                            loading='lazy'
                                             xmlns="http://www.w3.org/2000/svg"
                                             className="w-2.5 fill-current"
                                             viewBox="0 0 124 124"
@@ -107,6 +109,7 @@ const Cart = () => {
                                         HandleAddToCart(it)
                                     }} className=' hover:text-yellow'>
                                         <svg
+                                            loading='lazy'
                                             xmlns="http://www.w3.org/2000/svg"
                                             className="w-2.5 fill-current"
                                             viewBox="0 0 42 42"

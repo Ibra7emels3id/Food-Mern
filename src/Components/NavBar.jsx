@@ -35,7 +35,6 @@ const NavBar = ({ dilogShow }) => {
                                 <svg className='w-[18px]  h-[18px text-white' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
                                     <path d="M36.8 192l566.3 0c20.3 0 36.8-16.5 36.8-36.8c0-7.3-2.2-14.4-6.2-20.4L558.2 21.4C549.3 8 534.4 0 518.3 0L121.7 0c-16 0-31 8-39.9 21.4L6.2 134.7c-4 6.1-6.2 13.2-6.2 20.4C0 175.5 16.5 192 36.8 192zM64 224l0 160 0 80c0 26.5 21.5 48 48 48l224 0c26.5 0 48-21.5 48-48l0-80 0-160-64 0 0 160-192 0 0-160-64 0zm448 0l0 256c0 17.7 14.3 32 32 32s32-14.3 32-32l0-256-64 0z" />
                                 </svg>
-
                                 <span className='ml-3'>Shop</span>
                             </Link>
                         </li>
@@ -65,7 +64,7 @@ const NavBar = ({ dilogShow }) => {
                                 to="/review"
                                 className="text-black text-sm flex items-center hover:text-yellow hover:border-r-[5px] border-yellow hover:bg-gray-100 px-8 py-4 transition-all"
                             >
-                                <svg  className='w-[18px]  h-[18px text-white' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                                <svg className='w-[18px]  h-[18px text-white' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
                                     <path d="M288 376.4l.1-.1 26.4 14.1 85.2 45.5-16.5-97.6-4.8-28.7 20.7-20.5 70.1-69.3-96.1-14.2-29.3-4.3-12.9-26.6L288.1 86.9l-.1 .3 0 289.2zm175.1 98.3c2 12-3 24.2-12.9 31.3s-23 8-33.8 2.3L288.1 439.8 159.8 508.3C149 514 135.9 513.1 126 506s-14.9-19.3-12.9-31.3L137.8 329 33.6 225.9c-8.6-8.5-11.7-21.2-7.9-32.7s13.7-19.9 25.7-21.7L195 150.3 259.4 18c5.4-11 16.5-18 28.8-18s23.4 7 28.8 18l64.3 132.3 143.6 21.2c12 1.8 22 10.2 25.7 21.7s.7 24.2-7.9 32.7L438.5 329l24.6 145.7z" />
                                 </svg>
                                 <span className='ml-3'>Review</span>

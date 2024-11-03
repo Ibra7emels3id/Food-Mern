@@ -157,7 +157,7 @@ const Products = () => {
                                         </Link>
                                         {loaderSpiner === item._id ? (
                                             <div className="flex items-center justify-center w-[100px]">
-                                                <svg xmlns="http://www.w3.org/2000/svg" className="w-8 m-auto animate-spin fill-yellow  block mx-auto" viewBox="0 0 24 24">
+                                                <svg  loading='lazy' xmlns="http://www.w3.org/2000/svg" className="w-8 m-auto animate-spin fill-yellow  block mx-auto" viewBox="0 0 24 24">
                                                     <path d="M12 22c5.421 0 10-4.579 10-10h-2c0 4.337-3.663 8-8 8s-8-3.663-8-8c0-4.336 3.663-8 8-8V2C6.579 2 2 6.58 2 12c0 5.421 4.579 10 10 10z" />
                                                 </svg>
                                             </div>
@@ -171,7 +171,6 @@ const Products = () => {
                                 <div className=" hidden boxView w-[90%] mt-1 absolute top-2  items-center justify-between">
                                     <div className="flex w-[100%] m-auto justify-between items-center">
                                         <Link to={`/product/details/${item._id}`} className="text-sm text-blue-500 hover:text-blue-700">
-
                                         </Link>
                                         <div >
                                             <button className='bg-white p-4 rounded-full'>👍</button>
@@ -184,7 +183,6 @@ const Products = () => {
                 </div>
             </div>
         </div>
-        // </div >
     );
 };
 

@@ -26,7 +26,7 @@ const Success = () => {
             <div className="flex flex-col items-center justify-center min-h-screen gap-4 p-4 md:p-6">
                 <div className="text-center">
                     <div className="flex bg-green-700 h-24 w-24 rounded-full m-auto items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="w-16 fill-current text-white" viewBox="0 0 512 512">
+                        <svg  loading='lazy' xmlns="http://www.w3.org/2000/svg" className="w-16 fill-current text-white" viewBox="0 0 512 512">
                             <ellipse cx="256" cy="256" rx="256" ry="255.832" className="fill-current text-green-700" />
                             <path d="M235.472 392.08L114.432 297.784l34.416-44.168 74.328 57.904 122.672-177.016 46.032 31.888z" className="fill-current text-white" />
                         </svg>

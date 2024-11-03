@@ -58,6 +58,7 @@ const Contact = () => {
                             className="mt-8 flex items-center justify-center text-sm w-full rounded-md px-6 py-3 bg-yellow hover:bg-orange text-white"
                         >
                             <svg
+                             loading='lazy'
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="16px"
                                 height="16px"
@@ -78,6 +79,7 @@ const Contact = () => {
                     <ul className="mt-4 flex flex-wrap justify-center gap-6">
                         <li className="flex items-center text-blue-600">
                             <svg
+                             loading='lazy'
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="16px"
                                 height="16px"
@@ -95,6 +97,7 @@ const Contact = () => {
                         </li>
                         <li className="flex items-center text-blue-600">
                             <svg
+                             loading='lazy'
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="16px"
                                 height="16px"

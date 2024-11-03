@@ -7,6 +7,7 @@ const Discover = () => {
                 <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-12">
                     <div className="text-center">
                         <svg
+                            loading='lazy'
                             xmlns="http://www.w3.org/2000/svg"
                             fill="#FFC43F"
                             className="w-8 mb-6 inline-block"
@@ -31,6 +32,7 @@ const Discover = () => {
                     </div>
                     <div className="text-center">
                         <svg
+                            loading='lazy'
                             xmlns="http://www.w3.org/2000/svg"
                             width={32}
                             height={32}
@@ -42,7 +44,6 @@ const Discover = () => {
                                 d="M22 5H2a1 1 0 0 0-1 1v4a3 3 0 0 0 2 2.82V22a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-9.18A3 3 0 0 0 23 10V6a1 1 0 0 0-1-1Zm-7 2h2v3a1 1 0 0 1-2 0Zm-4 0h2v3a1 1 0 0 1-2 0ZM7 7h2v3a1 1 0 0 1-2 0Zm-3 4a1 1 0 0 1-1-1V7h2v3a1 1 0 0 1-1 1Zm10 10h-4v-2a2 2 0 0 1 4 0Zm5 0h-3v-2a4 4 0 0 0-8 0v2H5v-8.18a3.17 3.17 0 0 0 1-.6a3 3 0 0 0 4 0a3 3 0 0 0 4 0a3 3 0 0 0 4 0a3.17 3.17 0 0 0 1 .6Zm2-11a1 1 0 0 1-2 0V7h2ZM4.3 3H20a1 1 0 0 0 0-2H4.3a1 1 0 0 0 0 2Z"
                             />
                         </svg>
-
                         <h3 className="text-gray-800 text-xl font-semibold mb-3">Quality guarantee</h3>
                         <p className="text-gray-600 text-sm">
                             Your data is protected by the latest security measures.
@@ -50,6 +51,7 @@ const Discover = () => {
                     </div>
                     <div className="text-center">
                         <svg
+                            loading='lazy'
                             xmlns="http://www.w3.org/2000/svg"
                             fill="#FFC43F"
                             className="w-8 mb-6 inline-block"
@@ -68,6 +70,7 @@ const Discover = () => {
                     </div>
                     <div className="text-center">
                         <svg
+                            loading='lazy'
                             xmlns="http://www.w3.org/2000/svg"
                             fill="#FFC43F"
                             className="w-8 mb-6 inline-block"
@@ -95,6 +98,7 @@ const Discover = () => {
                     </div>
                     <div className="text-center">
                         <svg
+                            loading='lazy'
                             xmlns="http://www.w3.org/2000/svg"
                             fill='#FFC43F'
                             className="w-8 mb-6 inline-block "
@@ -137,6 +141,7 @@ const Discover = () => {
                     </div>
                     <div className="text-center">
                         <svg
+                            loading='lazy'
                             xmlns="http://www.w3.org/2000/svg"
                             fill="#FFC43F"
                             className="w-8 mb-6 inline-block"
@@ -171,6 +176,7 @@ const Discover = () => {
                     </div>
                     <div className="text-center">
                         <svg
+                            loading='lazy'
                             className="w-8 mb-6 inline-block text-yellow"
                             xmlns="http://www.w3.org/2000/svg"
                             width={32}
@@ -182,7 +188,6 @@ const Discover = () => {
                                 d="M21.5 15a3 3 0 0 0-1.9-2.78l1.87-7a1 1 0 0 0-.18-.87A1 1 0 0 0 20.5 4H6.8l-.33-1.26A1 1 0 0 0 5.5 2h-2v2h1.23l2.48 9.26a1 1 0 0 0 1 .74H18.5a1 1 0 0 1 0 2h-13a1 1 0 0 0 0 2h1.18a3 3 0 1 0 5.64 0h2.36a3 3 0 1 0 5.82 1a2.94 2.94 0 0 0-.4-1.47A3 3 0 0 0 21.5 15Zm-3.91-3H9L7.34 6H19.2ZM9.5 20a1 1 0 1 1 1-1a1 1 0 0 1-1 1Zm8 0a1 1 0 1 1 1-1a1 1 0 0 1-1 1Z"
                             />
                         </svg>
-
                         <h3 className="text-gray-800 text-xl font-semibold mb-3">
                             Free delivery
                         </h3>
@@ -192,6 +197,7 @@ const Discover = () => {
                     </div>
                     <div className="text-center">
                         <svg
+                            loading='lazy'
                             className="w-8 mb-6 inline-block text-yellow"
                             xmlns="http://www.w3.org/2000/svg"
                             width={32}
@@ -203,8 +209,6 @@ const Discover = () => {
                                 d="M19.63 3.65a1 1 0 0 0-.84-.2a8 8 0 0 1-6.22-1.27a1 1 0 0 0-1.14 0a8 8 0 0 1-6.22 1.27a1 1 0 0 0-.84.2a1 1 0 0 0-.37.78v7.45a9 9 0 0 0 3.77 7.33l3.65 2.6a1 1 0 0 0 1.16 0l3.65-2.6A9 9 0 0 0 20 11.88V4.43a1 1 0 0 0-.37-.78ZM18 11.88a7 7 0 0 1-2.93 5.7L12 19.77l-3.07-2.19A7 7 0 0 1 6 11.88v-6.3a10 10 0 0 0 6-1.39a10 10 0 0 0 6 1.39Zm-4.46-2.29l-2.69 2.7l-.89-.9a1 1 0 0 0-1.42 1.42l1.6 1.6a1 1 0 0 0 1.42 0L15 11a1 1 0 0 0-1.42-1.42Z"
                             />
                         </svg>
-
-
                         <h3 className="text-gray-800 text-xl font-semibold mb-3">
                             100% secure payment
                         </h3>

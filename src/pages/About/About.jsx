@@ -24,6 +24,7 @@ const About = () => {
                     </div>
                     <div className="w-full lg:w-8/12">
                         <img
+                         loading='lazy'
                             className="w-full h-full"
                             src="https://i.ibb.co/FhgPJt8/Rectangle-116.png"
                             alt="A group of People"
@@ -49,11 +50,13 @@ const About = () => {
                         <div className="grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 lg:gap-4 shadow-lg rounded-md">
                             <div className="p-4 pb-6 flex justify-center flex-col items-center">
                                 <img
+                                 loading='lazy'
                                     className="md:block hidden"
                                     src="https://i.ibb.co/FYTKDG6/Rectangle-118-2.png"
                                     alt="Alexa featured Image"
                                 />
                                 <img
+                                 loading='lazy'
                                     className="md:hidden block"
                                     src="https://i.ibb.co/zHjXqg4/Rectangle-118.png"
                                     alt="Alexa featured Image"
@@ -64,11 +67,13 @@ const About = () => {
                             </div>
                             <div className="p-4 pb-6 flex justify-center flex-col items-center">
                                 <img
+                                 loading='lazy'
                                     className="md:block hidden"
                                     src="https://i.ibb.co/fGmxhVy/Rectangle-119.png"
                                     alt="Olivia featured Image"
                                 />
                                 <img
+                                 loading='lazy'
                                     className="md:hidden block"
                                     src="https://i.ibb.co/NrWKJ1M/Rectangle-119.png"
                                     alt="Olivia featured Image"
@@ -79,11 +84,13 @@ const About = () => {
                             </div>
                             <div className="p-4 pb-6 flex justify-center flex-col items-center">
                                 <img
+                                 loading='lazy'
                                     className="md:block hidden"
                                     src="https://i.ibb.co/Pc6XVVC/Rectangle-120.png"
                                     alt="Liam featued Image"
                                 />
                                 <img
+                                 loading='lazy'
                                     className="md:hidden block"
                                     src="https://i.ibb.co/C5MMBcs/Rectangle-120.png"
                                     alt="Liam featued Image"
@@ -94,11 +101,13 @@ const About = () => {
                             </div>
                             <div className="p-4 pb-6 flex justify-center flex-col items-center">
                                 <img
+                                 loading='lazy'
                                     className="md:block hidden"
                                     src="https://i.ibb.co/7nSJPXQ/Rectangle-121.png"
                                     alt="Elijah featured image"
                                 />
                                 <img
+                                 loading='lazy'
                                     className="md:hidden block"
                                     src="https://i.ibb.co/ThZBWxH/Rectangle-121.png"
                                     alt="Elijah featured image"

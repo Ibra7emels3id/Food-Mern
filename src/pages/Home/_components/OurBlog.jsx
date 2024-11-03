@@ -16,6 +16,7 @@ const OurBlog = () => {
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-16 max-lg:max-w-3xl max-md:max-w-md mx-auto">
                             <div className="bg-white cursor-pointer rounded p-3 overflow-hidden shadow-xl relative top-0 hover:-top-2 transition-all duration-300">
                                 <img
+                                    loading='lazy'
                                     src="https://readymadeui.com/Imagination.webp"
                                     alt="Blog Post 1"
                                     className="w-full h-60 object-cover rounded-lg"
@@ -37,6 +38,7 @@ const OurBlog = () => {
                             </div>
                             <div className="bg-white cursor-pointer rounded overflow-hidden shadow-xl p-3 relative top-0 hover:-top-2 transition-all duration-300">
                                 <img
+                                    loading='lazy'
                                     src="https://readymadeui.com/hacks-watch.webp"
                                     alt="Blog Post 2"
                                     className="w-full h-60 object-cover rounded-lg"
@@ -58,6 +60,7 @@ const OurBlog = () => {
                             </div>
                             <div className="bg-white cursor-pointer rounded overflow-hidden shadow-xl p-3 relative top-0 hover:-top-2 transition-all duration-300">
                                 <img
+                                    loading='lazy'
                                     src="https://readymadeui.com/prediction.webp"
                                     alt="Blog Post 3"
                                     className="w-full rounded-lg h-60 object-cover"
@@ -80,7 +83,6 @@ const OurBlog = () => {
                         </div>
                     </div>
                 </div>
-
             </div>
         </>
     );

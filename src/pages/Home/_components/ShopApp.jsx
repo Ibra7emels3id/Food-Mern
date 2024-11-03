@@ -12,7 +12,7 @@ const ShopApp = () => {
             <div className="flex relative  py-28 m-auto rounded-2xl">
                 <div className="flex flex-col justify-center bg-[#fff9eb] p-5 md:w-[95%] w-[98%] m-auto min-h-[500px] items-center">
                     <div className="image">
-                        <img className='lg:w-[370px] top-5 left-10   lg:left-32  md:absolute'  src={phone} alt="Product" />
+                        <img  loading='lazy' className='lg:w-[370px] top-5 left-10   lg:left-32  md:absolute'  src={phone} alt="Product" />
                     </div>
                     <div className="text text-center md:text-start md:ml-[380px] lg:ml-[500px]">
                         <h3 className='text-4xl font-bold'>Shop faster with foodmart App</h3>

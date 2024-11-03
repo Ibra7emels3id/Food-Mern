@@ -11,7 +11,7 @@ const CannedFood = () => {
     return (
         <>
             <div className=''>
-                <h1 className='mx-12 my-12 font-bold text-3xl'>Newly Arrived Brands</h1>
+                <h1 className='mx-12 my-12 font-bold md:text-3xl'>Newly Arrived Brands</h1>
                 <div className="h-[200px] w-[95%] m-auto  flex items-center">
                     <Swiper
 
@@ -51,7 +51,7 @@ const CannedFood = () => {
                         <SwiperSlide className='m-auto rounded-lg shadow-[0px_5px_22px_rgba(0,_0,_0,_0.04)] h-32 hover:shadow-2xl flex items-center justify-center w-full p-4'>
                             <div className="flex items-center justify-center h-full m-auto w-full">
                                 <div className="image">
-                                    <img className='w-[120px] h-full' src={img} alt="Image" />
+                                    <img  loading='lazy' className='w-[120px]  h-full' src={img} alt="Image" />
                                 </div>
                                 <div className="text ml-3">
                                     <h3 className=' font-normal  text-light mt-3 font-mono text-lg'>Amber Jar</h3>
@@ -62,7 +62,7 @@ const CannedFood = () => {
                         <SwiperSlide className='m-auto rounded-lg shadow-[0px_5px_22px_rgba(0,_0,_0,_0.04)] h-32 hover:shadow-2xl flex items-center justify-center w-full p-4'>
                             <div className="flex items-center justify-center h-full m-auto w-full">
                                 <div className="image">
-                                    <img className='w-[120px] h-full' src={img} alt="Image" />
+                                    <img  loading='lazy' className='w-[120px] h-full' src={img} alt="Image" />
                                 </div>
                                 <div className="text ml-3">
                                     <h3 className=' font-normal  text-light mt-3 font-mono text-lg'>Amber Jar</h3>
@@ -73,7 +73,7 @@ const CannedFood = () => {
                         <SwiperSlide className='m-auto rounded-lg shadow-[0px_5px_22px_rgba(0,_0,_0,_0.04)] h-32 hover:shadow-2xl flex items-center justify-center w-full p-4'>
                             <div className="flex items-center justify-center h-full m-auto w-full">
                                 <div className="image">
-                                    <img className='w-[120px] h-full' src={img} alt="Image" />
+                                    <img  loading='lazy' className='w-[120px] h-full' src={img} alt="Image" />
                                 </div>
                                 <div className="text ml-3">
                                     <h3 className=' font-normal  text-light mt-3 font-mono text-lg'>Amber Jar</h3>
@@ -84,7 +84,7 @@ const CannedFood = () => {
                         <SwiperSlide className='m-auto rounded-lg shadow-[0px_5px_22px_rgba(0,_0,_0,_0.04)] h-32 hover:shadow-2xl flex items-center justify-center w-full p-4'>
                             <div className="flex items-center justify-center h-full m-auto w-full">
                                 <div className="image">
-                                    <img className='w-[120px] h-full' src={img} alt="Image" />
+                                    <img  loading='lazy' className='w-[120px] h-full' src={img} alt="Image" />
                                 </div>
                                 <div className="text ml-3">
                                     <h3 className=' font-normal  text-light mt-3 font-mono text-lg'>Amber Jar</h3>
@@ -95,7 +95,7 @@ const CannedFood = () => {
                         <SwiperSlide className='m-auto rounded-lg shadow-[0px_5px_22px_rgba(0,_0,_0,_0.04)] h-32 hover:shadow-2xl flex items-center justify-center w-full p-4'>
                             <div className="flex items-center justify-center h-full m-auto w-full">
                                 <div className="image">
-                                    <img className='w-[120px] h-full' src={img} alt="Image" />
+                                    <img  loading='lazy' className='w-[120px] h-full' src={img} alt="Image" />
                                 </div>
                                 <div className="text ml-3">
                                     <h3 className=' font-normal  text-light mt-3 font-mono text-lg'>Amber Jar</h3>
@@ -106,7 +106,7 @@ const CannedFood = () => {
                         <SwiperSlide className='m-auto rounded-lg shadow-[0px_5px_22px_rgba(0,_0,_0,_0.04)] h-32 hover:shadow-2xl flex items-center justify-center w-full p-4'>
                             <div className="flex items-center justify-center h-full m-auto w-full">
                                 <div className="image">
-                                    <img className='w-[120px] h-full' src={img} alt="Image" />
+                                    <img  loading='lazy' className='w-[120px] h-full' src={img} alt="Image" />
                                 </div>
                                 <div className="text ml-3">
                                     <h3 className=' font-normal  text-light mt-3 font-mono text-lg'>Amber Jar</h3>

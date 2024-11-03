@@ -270,7 +270,7 @@ const Header = ({ UserData }) => {
                         </li>
                         <li className="max-lg:border-b max-lg:px-3 max-lg:py-3">
                             <Link
-                                to="/"
+                                to="/blog"
                                 className="hover:text-yellow text-gray-600 font-semibold text-[15px] block"
                             >
                                 Blog
@@ -278,7 +278,7 @@ const Header = ({ UserData }) => {
                         </li>
                         <li className="max-lg:border-b max-lg:px-3 max-lg:py-3">
                             <Link
-                                to="/"
+                                to="/about"
                                 className="hover:text-yellow text-gray-600 font-semibold text-[15px] block"
                             >
                                 About
@@ -286,34 +286,26 @@ const Header = ({ UserData }) => {
                         </li>
                         <li className="max-lg:border-b max-lg:px-3 max-lg:py-3">
                             <Link
-                                to="/"
+                                to="/review"
+                                className="hover:text-yellow text-gray-600 font-semibold text-[15px] block"
+                            >
+                                Review
+                            </Link>
+                        </li>
+                        <li className="max-lg:border-b max-lg:px-3 max-lg:py-3">
+                            <Link
+                                to="/team"
+                                className="hover:text-yellow text-gray-600 font-semibold text-[15px] block"
+                            >
+                                Team
+                            </Link>
+                        </li>
+                        <li className="max-lg:border-b max-lg:px-3 max-lg:py-3">
+                            <Link
+                                to="/contact"
                                 className="hover:text-yellow text-gray-600 font-semibold text-[15px] block"
                             >
                                 Contact
-                            </Link>
-                        </li>
-                        <li className="max-lg:border-b max-lg:px-3 max-lg:py-3">
-                            <Link
-                                to="/"
-                                className="hover:text-yellow text-gray-600 font-semibold text-[15px] block"
-                            >
-                                Source
-                            </Link>
-                        </li>
-                        <li className="max-lg:border-b max-lg:px-3 max-lg:py-3">
-                            <Link
-                                to="/"
-                                className="hover:text-yellow text-gray-600 font-semibold text-[15px] block"
-                            >
-                                Partner
-                            </Link>
-                        </li>
-                        <li className="max-lg:border-b max-lg:px-3 max-lg:py-3">
-                            <Link
-                                to="/"
-                                className="hover:text-yellow text-gray-600 font-semibold text-[15px] block"
-                            >
-                                More
                             </Link>
                         </li>
                     </ul>

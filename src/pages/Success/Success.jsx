@@ -9,9 +9,9 @@ const Success = () => {
     const { cartPayment } = useSelector((state) => state.cartPay)
     const { user } = useSelector((state) => state.user)
     const dispatch = useDispatch();
-    const {id} =  useParams()
+    const { id } = useParams()
 
-    const FilterData = cartPayment?.find((it)=> it.paymentId === id)
+    const FilterData = cartPayment?.find((it) => it.paymentId === id)
 
     console.log(FilterData);
 
@@ -49,15 +49,18 @@ const Success = () => {
                             </div>
                             <div className="flex justify-between">
                                 <div>Total</div>
-                                <div className="ml-2 font-medium">${FilterData?.subTotal || '0000' }</div>
+                                <div className="ml-2 font-medium">${FilterData?.subTotal || '0000'}</div>
                             </div>
                         </div>
                     </CardContent>
-                    <Link to="/" className="w-full inline-block justify-center" style={{ height: "inherit" }} prefetch={false}>
-                        <Button type="submit" className="w-full">
-                            View my account translet
-                        </Button>
-                    </Link>
+                    <div className="flex gap-3 p-3 text-center">
+                        <Link to="/" className="w-full bg-yellow h-10 flex text-white py-3 justify-center" style={{ height: "inherit" }} prefetch={false}>
+                            Home
+                        </Link>
+                        <Link to="/transactions" className="w-full h-10 py-3 text-white flex bg-green-600  justify-center" style={{ height: "inherit" }} prefetch={false}>
+                            Order
+                        </Link>
+                    </div>
                 </Card>
             </div>
         </>

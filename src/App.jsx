@@ -27,6 +27,11 @@ import UpdateProduct from './admin/pages/Products/UpdateProduct';
 import UpdateCategory from './admin/pages/Category/UpdateCategory';
 import Account from './pages/Account/Account';
 import FilterCategory from './pages/FilterCategory/FilterCategory';
+import Blog from './pages/Blog/Blog';
+import About from './pages/About/About';
+import Contact from './pages/Contact/Contact';
+import Review from './pages/Review/Review';
+import Team from './pages/Team/Team';
 
 function App() {
     const token = localStorage.getItem('token');
@@ -75,6 +80,16 @@ function App() {
                     <Route path="/transactions" element={<Transactions />} />
                     <Route path="/account/:id" element={<Account />} />
                     <Route path="/category/:id" element={<FilterCategory />} />
+                    <Route path="/blog" element={<Blog />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/contact" element={<Contact />} />
+                    <Route path="/review" element={<Review />} />
+                    <Route path="/team" element={<Team />} />
+
+
+
+
+
 
 
 

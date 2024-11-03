@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../../Components/Header'
 import Footer from '../../Components/Footer'
 import MainSection from './_components/MainSection';
@@ -13,13 +13,23 @@ import JustArrived from './_components/JustArrived';
 import OurBlog from './_components/OurBlog';
 import ShopApp from './_components/ShopApp';
 import Discover from './_components/Discover';
+import Loading from '../../Components/Loading';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchUser } from '../../features/UserSlice';
 
-const Home = ({UserData}) => {
-    const [loading, setLoading] = useState(false)
+const Home = ({ UserData }) => {
+    const { sLoading } = useSelector((state) => state.user)
+    const dispatch = useDispatch()
 
 
-    if (loading) {
-        // return <Loader />
+
+    useEffect(() => {
+        dispatch(fetchUser())
+    }, [])
+
+
+    if (sLoading) {
+        return <Loading />
     }
 
     return (
@@ -27,7 +37,7 @@ const Home = ({UserData}) => {
             <Header UserData={UserData} />
             <MainSection />
             <Category />
-            <CannedFood/>
+            <CannedFood />
             <Products UserData={UserData} />
             <Offers />
             <SellingProducts />

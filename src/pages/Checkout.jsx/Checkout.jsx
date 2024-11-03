@@ -14,8 +14,8 @@ const stripePromise = loadStripe('pk_test_51PDqAJP7DuJ1bxg9C8hrMTzsSl9qWrMA0oRfd
 
 const CheckoutForm = () => {
     const { id } = useParams()
-    const {discount} = useParams()
-    const {tex} = useParams()
+    const { discount } = useParams()
+    const { tex } = useParams()
 
     const [isLoading, setIsLoading] = React.useState(false);
     const stripe = useStripe();
@@ -24,7 +24,7 @@ const CheckoutForm = () => {
     const navegate = useNavigate();
     const [errorMessage, setErrorMessage] = React.useState('');
     const { user } = useSelector((state) => state.user)
-    const {cart} = useSelector(state => state.cart);
+    const { cart } = useSelector(state => state.cart);
     const [dataPayment, setDataPayment] = React.useState({
         address: '',
         phone: '',
@@ -54,11 +54,11 @@ const CheckoutForm = () => {
                     email: user?.user?.email,
                     items: cart?.cart?.items,
                     userId: user?.user?._id,
-                    address:dataPayment.address ,
+                    address: dataPayment.address,
                     phone: dataPayment.phone,
                     discount: discount,
                     tex: tex,
-                    CartID: cart?.cart?._id 
+                    CartID: cart?.cart?._id
                 }),
             });
 
@@ -74,7 +74,7 @@ const CheckoutForm = () => {
                 payment_method: {
                     card: elements.getElement(CardElement),
                     billing_details: {
-                        name: dataPayment.CartName ,
+                        name: dataPayment.CartName,
                     },
                 },
             });
@@ -91,6 +91,7 @@ const CheckoutForm = () => {
 
         } catch (error) {
             console.error('Error during payment:', error.message);
+            setIsLoading(false);
         } finally {
             setIsLoading(false);
         }
@@ -171,12 +172,21 @@ const CheckoutForm = () => {
                                     </div>
                                 </div>
                                 <div className="flex flex-wrap gap-4 mt-8">
-                                    <button
+                                    {isLoading ? <p
+                                        className="px-7 w-full py-2 text-sm tracking-wide bg-yellow text-white rounded-md"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="w-8 animate-spin fill-white  block mx-auto"
+                                            viewBox="0 0 24 24">
+                                            <path
+                                                d="M12 22c5.421 0 10-4.579 10-10h-2c0 4.337-3.663 8-8 8s-8-3.663-8-8c0-4.336 3.663-8 8-8V2C6.579 2 2 6.58 2 12c0 5.421 4.579 10 10 10z"
+                                                data-original="#000000" />
+                                        </svg>
+                                    </p> : <button
                                         type="submit"
                                         className="px-7 w-full py-3.5 text-sm tracking-wide bg-yellow text-white rounded-md"
                                     >
-                                        Submit
-                                    </button>
+                                        Payment 
+                                    </button>}
                                 </div>
                             </form>
                         </div>

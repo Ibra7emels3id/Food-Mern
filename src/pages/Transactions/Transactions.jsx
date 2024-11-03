@@ -30,9 +30,6 @@ const Transactions = () => {
     };
 
 
-    console.log(sortedCartPayment);
-
-
     // UseEffect
     useEffect(() => {
         dispatch(fetchCartPayment())
@@ -83,10 +80,10 @@ const Transactions = () => {
                                         <div className="flex  gap-3">
                                             <p className="text-sm flex items-center font-bold">Status: <span className={`${item.status.toLowerCase() === 'pending' && 'bg-yellow'} ${item.status.toLowerCase() === 'out for delivery' && 'bg-lime-900'} ${item.status.toLowerCase() === 'complete' && 'bg-green-600'} ${item.status === 'pending' && 'bg-yellow'} w-[130px] ml-2 text-white rounded-3xl h-8 flex items-center justify-center`}>{item.status}</span></p>
                                         </div>
-                                        <div className="flex flex-col items-center justify-center px-2 gap-3">
+                                        <div className="flex flex-col  items-center justify-center px-2 gap-3">
                                             <button onClick={() => {
                                                 handleStateDetails(item._id)
-                                            }} className='border border-black font-normal text-xl w-[100px] rounded-xl hover:bg-black hover:text-white h-10'>Details</button>
+                                            }} className='border border-black font-normal text-xl w-[150px] rounded-xl hover:bg-black hover:text-white h-10'>{StateDetailsId ? 'Hide Details' : 'Details'}</button>
                                         </div>
                                     </div>
                                     <div className={`${StateDetailsId == item._id ? 'flex' : 'hidden'}  transform transition duration-1000 ease flex-col mt-12 border-t-2 p-3`}>
@@ -117,7 +114,7 @@ const Transactions = () => {
                     </div> :
                         <div className='flex flex-col my-10'>
                             <h3 className="text-center text-xl font-bold">Not Order Payment </h3>
-                            <Link to={'/shop'}>Order Now</Link>
+                            <Link to={'/shop'} className='text-center'>Order Now</Link>
                         </div>}
                 </div>
             </div>

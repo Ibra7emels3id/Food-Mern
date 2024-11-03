@@ -3,6 +3,7 @@ import Header from '../../Components/Header';
 import { Link, useNavigate } from 'react-router-dom';
 import Footer from '../../Components/Footer';
 import { toast } from 'react-toastify';
+import { useSelector } from 'react-redux';
 
 
 
@@ -11,12 +12,8 @@ const register = () => {
     const User = true
     const [loading, setLoading] = useState(false)
     const [CheckPass, setCheckPass] = useState('password')
-    const [checked , setChecked] = useState('checkbox')
-    const [data, setData] = useState({
-        name: '',
-        email: '',
-        password: '',
-    })
+    const {user , sLoading} = useSelector((state) => state.user)
+    const [data, setData] = useState({})
 
     console.log(data);
 
@@ -58,6 +55,12 @@ const register = () => {
     }
 
 
+    // Check if user is logged in or not
+    if (!sLoading) {
+        if (user?.user) {
+            Navigate('/');
+        }
+    }
 
 
     // Set The Loading Dom

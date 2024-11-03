@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { toast } from "react-toastify";
+import { Flip, toast } from "react-toastify";
 
 // Add To Cart
 export const AddToCart = createAsyncThunk('AddToCart', async ({ item }, thunkAPI) => {
@@ -8,7 +8,11 @@ export const AddToCart = createAsyncThunk('AddToCart', async ({ item }, thunkAPI
     const userId = state?.user.user.user?._id;
     try {
         const response = await axios.post('http://localhost:3000/api/cart', { userId, item });
-        toast.success('add Cart success')
+        toast.success('add Cart success', {
+            position: "bottom-center",
+            autoClose: 2000,
+            transition: Flip,
+        })
         return response.data;
     } catch (error) {
         toast.error('filed to add cart')
@@ -24,7 +28,12 @@ export const RemoveFromCart = createAsyncThunk('RemoveFromCart', async ({ item }
     try {
         const response = await axios.post('http://localhost:3000/api/cart-remove', { userId, item });
         console.log(response.data);
-        toast.success('Remove Cart success')
+        toast.warning('Remove Cart success',{
+            position: "bottom-center",
+            autoClose: 2000,
+            transition: Flip,
+
+        })
         return response.data;
     } catch (error) {
         toast.error('filed to remove cart')
@@ -38,7 +47,6 @@ export const fetchCartProduct = createAsyncThunk('fetchCartProduct', async (_, {
     const state = getState();
     const userId = state?.user.user.user?._id;
     if (!userId) throw new Error("User ID not found");
-    // console.log(userId);
     try {
         const response = await axios.get('http://localhost:3000/api/cart', {
             params: { userId }

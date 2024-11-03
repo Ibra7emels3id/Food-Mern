@@ -4,6 +4,7 @@ import UserSlice from '../features/UserSlice'
 import cartSlice from '../features/CartSlice'
 import CategorySlice from '../features/CategorySlice'
 import cartPaymentSlice from '../features/CartPaymentSlice'
+import ReviewSlice from '../features/ReviewSlice'
 
 
 
@@ -16,6 +17,7 @@ const store = configureStore({
         cartPay: cartPaymentSlice,
         allUsers:UserSlice,
         payments:cartPaymentSlice,
+        reviews: ReviewSlice,
     },
 })
 

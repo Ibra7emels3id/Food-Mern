@@ -28,9 +28,9 @@ const Home = ({ UserData }) => {
     }, [])
 
 
-    if (sLoading) {
-        return <Loading />
-    }
+    // if (sLoading) {
+    //     return <Loading />
+    // }
 
     return (
         <>

@@ -203,7 +203,12 @@ const Header = ({ UserData }) => {
                                         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
                                         variant="dot"
                                     >
-                                        <Avatar sx={{ width: '35px', height: '35px' }} alt="Remy Sharp" src={`${import.meta.env.VITE_SOME_URL}/Uploads/${user?.user?.image}`} />
+                                        <img
+                                            className="w-10 h-10 rounded-full"
+                                            src={`${import.meta.env.VITE_SOME_URL}/Uploads/${user?.user?.image}?timestamp=${new Date().getTime()}`}
+                                            alt=""
+                                        />
+                                        {/* <Avatar sx={{ width: '35px', height: '35px' }} alt="Remy Sharp" src={`${import.meta.env.VITE_SOME_URL}/Uploads/${user?.user?.image}`} /> */}
                                     </StyledBadge>
                                 </Stack>
                                 {/* <MoreVert /> */}

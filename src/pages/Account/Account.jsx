@@ -8,6 +8,7 @@ import { styled } from '@mui/joy';
 import { useNavigate, useParams } from 'react-router-dom';
 import { fetchUser, UpdateUserData } from '../../features/UserSlice';
 import Loading from '../../Components/Loading';
+import logo from '../../assets/images/boy.png';
 
 const VisuallyHiddenInput = styled('input')`
   clip: rect(0 0 0 0);
@@ -29,7 +30,6 @@ const Account = () => {
     const { id } = useParams()
     const dispatch = useDispatch();
     const Navigate = useNavigate()
-
 
 
     // Handle Cheng Events
@@ -79,7 +79,7 @@ const Account = () => {
                 <div className="flex flex-col items-center w-full mt-10">
                     <form action="" className='w-full flex flex-col items-center'>
                         <div className="image">
-                            {ImageUrl ? <img loading='lazy' className='w-[170px] rounded-full' src={URL.createObjectURL(ImageUrl)} alt="Profile Picture" /> : <img loading='lazy' className='w-[170px] rounded-full' src={`${import.meta.env.VITE_SOME_URL}/Uploads/${UserData?.image}`} alt="Profile Picture" />}
+                            {ImageUrl ? <img className='w-[170px] rounded-full' src={URL.createObjectURL(ImageUrl)} alt="Profile Picture" /> : UserData?.image  ? <img  className='w-[170px] rounded-full' src={`${import.meta.env.VITE_SOME_URL}/Uploads/${UserData?.image}`} alt="Profile Picture" /> : <img className='w-[170px] rounded-full' src={logo} alt="Profile Picture" />}
                         </div>
                         <div className="flex mt-6">
                             <Button

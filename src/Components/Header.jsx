@@ -11,6 +11,7 @@ import MenuItem from '@mui/joy/MenuItem';
 import MoreVert from '@mui/icons-material/MoreVert';
 import { logOutUser } from '../features/UserSlice';
 import NavBar from './NavBar';
+import logo from '../assets/images/boy.png';
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -203,11 +204,11 @@ const Header = ({ UserData }) => {
                                         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
                                         variant="dot"
                                     >
-                                        <img
+                                        {user?.user?.image ? <img
                                             className="w-10 h-10 rounded-full"
                                             src={`${import.meta.env.VITE_SOME_URL}/Uploads/${user?.user?.image}?timestamp=${new Date().getTime()}`}
                                             alt=""
-                                        />
+                                        /> :  <img className='w-10 h-10 rounded-full' src={logo} alt="Profile Picture" />}
                                         {/* <Avatar sx={{ width: '35px', height: '35px' }} alt="Remy Sharp" src={`${import.meta.env.VITE_SOME_URL}/Uploads/${user?.user?.image}`} /> */}
                                     </StyledBadge>
                                 </Stack>

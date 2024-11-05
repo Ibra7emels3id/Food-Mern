@@ -92,7 +92,7 @@ const Transactions = () => {
                                             return (
                                                 <div key={it._id} className="flex items-center justify-between w-full my-2 p-3 border-y-2">
                                                     <div className="flex gap-3">
-                                                        <img  loading='lazy' className='w-[130px] h-[130px]' src={`${import.meta.env.VITE_SOME_URL}/Uploads/${it.image}`} alt={it.title} />
+                                                        <img  loading='lazy' className='w-[130px] h-[130px]' src={it.image} alt={it.title} />
                                                     </div>
                                                     <div className="flex flex-col gap-3">
                                                         <p className="text-sm font-bold">Customer Name: {it.title}</p>

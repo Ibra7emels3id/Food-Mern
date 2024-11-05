@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import Loading from '../../Components/Loading';
 
 const Shop = () => {
-    const {user , sLoading} = useSelector((state)=> state.user)
+    const { sLoading} = useSelector((state)=> state.user)
 
     if(sLoading) {
         return <Loading/>

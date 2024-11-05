@@ -110,7 +110,6 @@ const ProductSlice = createSlice({
         });
         builder.addCase(UpdateProductId.fulfilled, (state, action) => {
             state.loading = false;
-            state.products = state.products.map(product => product._id === action.payload._id? action.payload : product);
         });
         builder.addCase(UpdateProductId.rejected, (state, action) => {
             state.loading = false;

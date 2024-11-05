@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Footer from '../../Components/Footer';
 import Header from '../../Components/Header';
 import { Link, useParams } from 'react-router-dom';
@@ -6,32 +6,28 @@ import { AddToCart, fetchCartProduct, RemoveFromCart } from '../../features/Cart
 import { fetchProductDetails } from '../../features/ProductSlice';
 import { useDispatch, useSelector, } from 'react-redux';
 import { Rating } from '@mui/material';
-import Loading from '../../Components/Loading';
 
 
 const DetailsProduct = () => {
     const dispatch = useDispatch();
     const { id } = useParams()
-    const { Product, loading } = useSelector((state) => state.Product)
+    const { Product } = useSelector((state) => state.Product)
     const { cart } = useSelector((state) => state.cart)
     const { user } = useSelector((state) => state.user)
     const [cartIdQuantity, setcartIdQuantity] = useState(null)
     const userId = user?.user?._id
 
+
     // Handle Add To Cart
     const HandleSendData = async (item) => {
-        // setLoaderSpinner(item._id)
         await dispatch(AddToCart({ userId, item }));
         dispatch(fetchCartProduct({ userId }));
-        // setLoaderSpinner(null);
     };
 
     // Handle Remove To Cart
     const HandleRemoveToCart = async (item) => {
-        // setLoaderSpinner(item._id)
         await dispatch(RemoveFromCart({ item }));
         dispatch(fetchCartProduct());
-        // setLoaderSpinner(null);
     };
 
 
@@ -42,20 +38,20 @@ const DetailsProduct = () => {
             dispatch(fetchProductDetails(id))
             setcartIdQuantity(quantityCart?.quantity)
         }
+        window.scrollTo(0, 0);
     }, [id, cart]);
 
 
     return (
         <>
-            {/* {loading && <Loading />} */}
             <Header />
             <div className="font-sans w-full md:w-[90%] m-auto tracking-wide max-md:mx-auto my-10">
-                <div className="bg-gradient-to-r bg-[#e3e8eb]  grid items-start grid-cols-1 lg:grid-cols-5 md:grid-cols-2">
+                <div className="bg-gradient-to-r bg-white  grid items-start grid-cols-1 lg:grid-cols-5 md:grid-cols-2">
                     <div className="lg:col-span-3 h-full p-8">
                         <div className="relative h-full flex items-center justify-center lg:min-h-[580px]">
                             <img
                                 loading='lazy'
-                                src={`${import.meta.env.VITE_SOME_URL}/Uploads/${Product?.image}`}
+                                src={Product?.image}
                                 alt="Product"
                                 className="lg:w-3/5 w-3/4 h-full object-contain max-lg:p-8"
                             />
@@ -273,4 +269,4 @@ const DetailsProduct = () => {
     );
 }
 
-export default DetailsProduct;
+export default React.memo(DetailsProduct);

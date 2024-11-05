@@ -10,6 +10,9 @@ import { AddToCart, fetchCartProduct } from '../../../features/CartSlice';
 const Products = () => {
     const dispatch = useDispatch();
     const { products } = useSelector((state) => state.Product);
+    const sortProduct = Array.isArray(products)
+    ? [...products].sort(() => Math.random() - 0.5)
+    : [];
     const { cart } = useSelector((state) => state.cart);
     const [loaderSpiner, setLoaderSpinner] = useState(null)
     const { user } = useSelector((state) => state.user)
@@ -25,13 +28,13 @@ const Products = () => {
 
 
 
-    const Items = products?.slice(0, 10).map((item) => {
+    const Items = sortProduct?.slice(0, 10).map((item) => {
         return (
             <div key={item._id} className="product relative pt-5 px-5 pb-3 bg-white rounded-lg hover:shadow-xl">
                 <div className="flex items-center justify-center bg-[#f9f9f9] rounded-lg">
-                    <img loading='lazy' className='w-64 h-56' src={`${import.meta.env.VITE_SOME_URL}/Uploads/${item.image}`} alt={item.title} />
+                    <img loading='lazy' className='w-64 h-56' src={item.image} alt={item.title} />
                 </div>
-                <h4 className="mt-2 text-2xl font-medium my-3 h-16">{item.title}</h4>
+                <h4 className="mt-2 text-2xl font-medium my-3 pt-1 h-14 flex items-center uppercase">{item.title}</h4>
                 <p className="text-gray-500 text-xs flex items-center justify-between">
                     <span>
                         <Rating name="read-only" value={item?.rating} readOnly />

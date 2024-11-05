@@ -139,8 +139,8 @@ const Products = () => {
                     {filteredItems?.map((item) => {
                         return (
                             <div key={item._id} className="product h-[410px] relative pt-5 px-5 pb-3 bg-white rounded-lg hover:shadow-xl">
-                                <div className="flex items-center justify-center bg-[#f9f9f9] rounded-lg">
-                                    <img loading='lazy' className='w-64 h-56' src={`${import.meta.env.VITE_SOME_URL}/Uploads/${item.image}`} alt={item.title} />
+                                <div className="flex items-center justify-center  rounded-lg">
+                                    <img loading='lazy' className='w-48 h-48' src={item.image} alt={item.title} />
                                 </div>
                                 <h4 className="mt-2 text-2xl font-medium my-3 h-16">{item.title}</h4>
                                 <p className="text-gray-500 text-xs flex items-center justify-between">
@@ -166,15 +166,6 @@ const Products = () => {
                                                 Add to Cart
                                             </button>
                                         )}
-                                    </div>
-                                </div>
-                                <div className=" hidden boxView w-[90%] mt-1 absolute top-2  items-center justify-between">
-                                    <div className="flex w-[100%] m-auto justify-between items-center">
-                                        <Link to={`/product/details/${item._id}`} className="text-sm text-blue-500 hover:text-blue-700">
-                                        </Link>
-                                        <div >
-                                            <button className='bg-white p-4 rounded-full'>👍</button>
-                                        </div>
                                     </div>
                                 </div>
                             </div>

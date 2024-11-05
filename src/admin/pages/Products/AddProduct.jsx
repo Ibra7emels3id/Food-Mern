@@ -11,7 +11,7 @@ const AddProduct = () => {
     const navigate = useNavigate()
     const [imageUrl, setImageUrl] = useState(null);
     const { category } = useSelector((state) => state.category)
-
+    const [loading, setLoading] = useState(false);
     const [product, setProduct] = useState({
         title: '',
         price: '',
@@ -32,7 +32,11 @@ const AddProduct = () => {
     // Handle Submit Data to server
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        if (!product.title || !product.price || !product.category || !product.description || !product.image || !product.count || !product.rating) {
+            alert('Please fill all the required fields');
+            return;
+        }
+        setLoading(true);
         try {
             const formData = new FormData();
             formData.append('title', product.title);
@@ -44,10 +48,9 @@ const AddProduct = () => {
             formData.append('image', product.image);
             formData.append('count', product.count);
             formData.append('rating', product.rating);
-            const res = await dispatch(AddProductCart({ formData })).unwrap();
-            if (res.msg === 'Product added successfully') {
-                console.log(res.msg);
+            await dispatch(AddProductCart({ formData })).then(() => {
                 navigate('/admin/products');
+                dispatch(fetchProducts());
                 setProduct({
                     title: '',
                     price: '',
@@ -59,10 +62,15 @@ const AddProduct = () => {
                     count: '',
                     rating: '',
                 });
-            }
-            dispatch(fetchProducts());
+            }).catch((err) => {
+                console.error('Failed to add product:', err);
+            })
+            setLoading(false);
         } catch (error) {
             console.error('Failed to add product:', error);
+            setLoading(false);
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -123,8 +131,14 @@ const AddProduct = () => {
                                 {imageUrl && <img className='mt-4 w-52 ' src={URL.createObjectURL(imageUrl)} alt="Uploaded Image" />}
                             </div>
                             <textarea onChange={handleInputChange} className='h-32 px-3 py-2 w-full mt-4 outline-none focus:outline-none border' name="description" id="description" placeholder='Enter your description' />
-                            <button type='submit' className='w-full h-12 px-6 text-white text-base font-semibold bg-yellow hover:bg-[#dbaa2c] rounded-md mt-8'>Add Product</button>
-                        </form>
+                            {loading ? <p type='submit' className='flex items-center justify-center w-full h-12 px-6 text-white text-base font-semibold bg-yellow  rounded-md mt-8'>
+                                <svg xmlns="http://www.w3.org/2000/svg" className="w-8 animate-spin fill-white block mx-auto"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 22c5.421 0 10-4.579 10-10h-2c0 4.337-3.663 8-8 8s-8-3.663-8-8c0-4.336 3.663-8 8-8V2C6.579 2 2 6.58 2 12c0 5.421 4.579 10 10 10z"
+                                        data-original="#000000" />
+                                </svg>
+                            </p> : <button type='submit' className='w-full h-12 px-6 text-white text-base font-semibold bg-yellow hover:bg-[#dbaa2c] rounded-md mt-8'>Add Product</button>}                        </form>
                     </div>
                 </div>
             </div>

@@ -70,7 +70,7 @@ const Cart = () => {
                     <div className="w-24 h-24 shrink-0 bg-white p-2 rounded-md">
                         <img
                             loading='lazy'
-                            src={`${import.meta.env.VITE_SOME_URL}/Uploads/${it.image}`}
+                            src={it.image}
                             className="w-full h-full object-contain"
                         />
                     </div>

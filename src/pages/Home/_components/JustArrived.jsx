@@ -86,10 +86,10 @@ const JustArrived = () => {
                         return (
                             <SwiperSlide key={it._id} className='m-auto  flex items-center justify-center w-full'>
                                 <div className="product pt-5 px-5 pb-3 bg-white rounded-lg hover:shadow-xl">
-                                    <div className="flex bg-[#f9f9f9]  rounded-lg">
-                                        <img  loading='lazy' className='w-full' src={`${import.meta.env.VITE_SOME_URL}/Uploads/${it.image}`} alt="" />
+                                    <div className="flex   rounded-lg">
+                                        <img  loading='lazy' className='w-full h-56' src={it.image} alt="" />
                                     </div>
-                                    <h4 className="mt-2 text-2xl font-medium my-2 h-16">{it.title}</h4>
+                                    <h4 className="mt-2 text-2xl my-2 h-16 flex items-center uppercase font-semibold">{it.title}</h4>
                                     <p className="text-gray-500 text-xs flex items-center justify-between">
                                         <span>
                                             <Rating name="read-only" value={it.rating} readOnly />

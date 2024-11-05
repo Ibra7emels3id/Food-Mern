@@ -32,8 +32,10 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const Products = () => {
     const Navigate = useNavigate();
     const dispatch = useDispatch()
-    const [loading, setLoading] = useState(true);
-    const { products, isLoading } = useSelector((state) => state.Product)
+    const { products } = useSelector((state) => state.Product)
+    const sortProduct = Array.isArray(products)
+    ? [...products].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    : [];
     const { user , sLoading } = useSelector((state) => state.user)
     const [open, setOpen] = React.useState(false);
     const [deleteproductId, setDeleteProductId] = useState(null);
@@ -78,7 +80,7 @@ const Products = () => {
                                 Navigate('/admin/products/addproduct')
                             }} className=' bg-yellow w-full h-10 hover:bg-[#e4be42]'>Add product</button>
                         </div>
-                        {products.length > 0 ? <div className="flex w-full my-10">
+                        {sortProduct?.length > 0 ? <div className="flex w-full my-10">
                             <TableContainer component={Paper}>
                                 <Table sx={{ minWidth: 900 }} aria-label="customized table">
                                     <TableHead>
@@ -97,7 +99,8 @@ const Products = () => {
                                         {products.map((it) => (
                                             <StyledTableRow key={it._id}>
                                                 <StyledTableCell sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }} component="th" scope="row">
-                                                    <img className='w-52' src={`${import.meta.env.VITE_SOME_URL}/Uploads/${it.image}`} alt="" />
+                                                    {/* <img className='w-52' src={`${import.meta.env.VITE_SOME_URL}/Uploads/${it.image}`} alt="" /> */}
+                                                    <img className='w-52' src={it.image} alt={it.title} />
                                                 </StyledTableCell>
                                                 <StyledTableCell align="center">{it.title}</StyledTableCell>
                                                 <StyledTableCell align="center">{it?.description?.slice(0, 50)}...</StyledTableCell>
@@ -106,7 +109,6 @@ const Products = () => {
                                                 <StyledTableCell align="center">
                                                     <Rating name="read-only" value={it?.rating} readOnly />
                                                 </StyledTableCell>
-
                                                 <StyledTableCell align="center">
                                                     <button onClick={() => {
                                                         Navigate(`/admin/product/edit-product/${it._id}`)

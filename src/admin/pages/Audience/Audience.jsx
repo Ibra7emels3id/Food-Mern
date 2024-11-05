@@ -34,7 +34,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const Audience = () => {
     const Navigate = useNavigate();
     const dispatch = useDispatch()
-    const [loading, setLoading] = useState(true);
     const { user, sLoading } = useSelector((state) => state.user)
     const [open, setOpen] = React.useState(false);
     const [deleteUserId, setdeleteUserId] = useState(null);
@@ -108,7 +107,7 @@ const Audience = () => {
                                         ).map((it) => (
                                             <StyledTableRow key={it._id}>
                                                 <StyledTableCell sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }} component="th" scope="row">
-                                                    <img className='w-52' src={`${import.meta.env.VITE_SOME_URL}/Uploads/${it.image}`} alt="" />
+                                                    <img className='w-52' src={it.image} alt="" />
                                                 </StyledTableCell>
                                                 <StyledTableCell align="center">{it.name}</StyledTableCell>
                                                 <StyledTableCell align="center">{it.email}</StyledTableCell>

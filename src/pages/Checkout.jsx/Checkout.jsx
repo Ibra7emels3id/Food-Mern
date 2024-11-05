@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 
 
 // Key Stripe
-const stripePromise = loadStripe('pk_test_51PDqAJP7DuJ1bxg9C8hrMTzsSl9qWrMA0oRfdqGKPdxcjO0LwgVWHRTQxxMjxpEn1AJYB9Dta5DfXW8f21hmQMD500wQY8u1pG');
+const stripePromise = loadStripe('pk_test_51PL8qABeVHROBfrLGvuTT98OX9yWkEQdvCZmLk4cj9LuaNxB97HvkbnYW5r29F5zUCVe1LrpEGLZhwdR3cRhM2ef00h7pg2ggQ');
 
 const CheckoutForm = () => {
     const { id } = useParams()
@@ -131,7 +131,9 @@ const CheckoutForm = () => {
                             </div>
                             <form onSubmit={handlePayment} className="mt-8">
                                 <div className="flex flex-col w-full my-4  space-y-4">
-                                    <CardElement className="px-4 py-3.5 bg-white text-gray-800 w-full text-sm border rounded-md focus:border-[#007bff] outline-none" />
+                                    <CardElement options={{
+                                        hidePostalCode: true
+                                    }} className="px-4 py-3.5 bg-white text-gray-800 w-full text-sm border rounded-md focus:border-[#007bff] outline-none" />
                                 </div>
                                 <div className="grid sm:col-span-2 sm:grid-cols-2 gap-4">
                                     <div>

@@ -136,7 +136,7 @@ const Header = ({ UserData }) => {
                         {cartItems.length > 0 ? cartItems?.map(product => (
                             <div key={product._id} className="flex items-center gap-2 p-2 bg-white hover:bg-gray-100 cursor-pointer">
                                 <img
-                                    src={`${import.meta.env.VITE_SOME_URL}/Uploads/${product.image}`}
+                                    src={product.image}
                                     alt={product.title}
                                     className="w-12 h-12"
                                 />
@@ -206,7 +206,7 @@ const Header = ({ UserData }) => {
                                     >
                                         {user?.user?.image ? <img
                                             className="w-10 h-10 rounded-full"
-                                            src={`${import.meta.env.VITE_SOME_URL}/Uploads/${user?.user?.image}?timestamp=${new Date().getTime()}`}
+                                            src={user?.user?.image}
                                             alt=""
                                         /> :  <img className='w-10 h-10 rounded-full' src={logo} alt="Profile Picture" />}
                                         {/* <Avatar sx={{ width: '35px', height: '35px' }} alt="Remy Sharp" src={`${import.meta.env.VITE_SOME_URL}/Uploads/${user?.user?.image}`} /> */}

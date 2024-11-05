@@ -14,9 +14,10 @@ const UpdateProduct = () => {
     const navigate = useNavigate()
     const [imageUrl, setImageUrl] = useState(null);
     const { category } = useSelector((state) => state.category)
-    const { Product, loading } = useSelector((state) => state.Product)
+    const { Product } = useSelector((state) => state.Product)
     const { user, sLoading } = useSelector((state) => state.user)
     const [product, setProduct] = useState({})
+    const [loading, setLoading] = useState(false)
 
     // handle Change event
     const handleInputChange = (e) => {
@@ -26,6 +27,7 @@ const UpdateProduct = () => {
     // Handle Submit Data to server
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
         try {
             const formData = new FormData();
             formData.append('title', product.title);
@@ -37,11 +39,20 @@ const UpdateProduct = () => {
             formData.append('image', product.image);
             formData.append('count', product.count);
             formData.append('rating', product.rating);
-            dispatch(UpdateProductId({ id, formData })).unwrap();
-            navigate('/admin/products');
-            dispatch(fetchProducts());
+            await dispatch(UpdateProductId({ id, formData }))
+                .then(() => {
+                    dispatch(fetchProducts());
+                    navigate('/admin/products');
+                })
+                .catch((error) => {
+                    console.error('Failed to update product:', error);
+                });
+            setLoading(false);
         } catch (error) {
             console.error('Failed to add product:', error);
+            setLoading(false);
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -121,10 +132,17 @@ const UpdateProduct = () => {
                                 }} type="file" id="uploadFile1" className="hidden" />
                             </label>
                             <div className="image flex items-center justify-center">
-                                {imageUrl ? <img className='mt-4 w-52 ' src={URL?.createObjectURL(imageUrl)} alt="Uploaded Image" /> : <img className='mt-4 w-52 ' src={`${import.meta.env.VITE_SOME_URL}/Uploads/${product.image}`} alt="Uploaded Image" />}
+                                {imageUrl ? <img className='mt-4 w-52 ' src={URL?.createObjectURL(imageUrl)} alt="Uploaded Image" /> : <img className='mt-4 w-52 ' src={product.image} alt="Uploaded Image" />}
                             </div>
                             <textarea value={product.description} onChange={handleInputChange} className='h-32 px-3 py-2 w-full mt-4 outline-none focus:outline-none border' name="description" id="description" placeholder='Enter your description' />
-                            <button type='submit' className='w-full h-12 px-6 text-white text-base font-semibold bg-yellow hover:bg-[#dbaa2c] rounded-md mt-8'>Update Product</button>
+                            {loading ? <p type='submit' className='flex items-center justify-center w-full h-12 px-6 text-white text-base font-semibold bg-yellow  rounded-md mt-8'>
+                                <svg xmlns="http://www.w3.org/2000/svg" className="w-8 animate-spin fill-white block mx-auto"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 22c5.421 0 10-4.579 10-10h-2c0 4.337-3.663 8-8 8s-8-3.663-8-8c0-4.336 3.663-8 8-8V2C6.579 2 2 6.58 2 12c0 5.421 4.579 10 10 10z"
+                                        data-original="#000000" />
+                                </svg>
+                            </p> : <button type='submit' className='w-full h-12 px-6 text-white text-base font-semibold bg-yellow hover:bg-[#dbaa2c] rounded-md mt-8'>Update Product</button>}
                         </form>
                     </div>
                 </div>

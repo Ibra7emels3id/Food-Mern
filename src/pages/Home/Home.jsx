@@ -1,24 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import Header from '../../Components/Header'
-import Footer from '../../Components/Footer'
-import MainSection from './_components/MainSection';
-import Category from './_components/Category';
-import CannedFood from './_components/CannedFood';
-import Products from './_components/Products';
-import Offers from './_components/Offers';
-import SellingProducts from './_components/SellingProducts';
+import React, { lazy, Suspense, useEffect, useState } from 'react';
 import Discount from './_components/Discount';
 import PopularProducts from './_components/PopularProducts';
 import JustArrived from './_components/JustArrived';
-import OurBlog from './_components/OurBlog';
-import ShopApp from './_components/ShopApp';
-import Discover from './_components/Discover';
-import Loading from '../../Components/Loading';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUser } from '../../features/UserSlice';
+import Loading from '../../Components/Loading';
 
 const Home = ({ UserData }) => {
-    const { sLoading } = useSelector((state) => state.user)
     const dispatch = useDispatch()
 
 
@@ -28,26 +16,41 @@ const Home = ({ UserData }) => {
     }, [])
 
 
-    // if (sLoading) {
-    //     return <Loading />
-    // }
+    // 
+    const Header = lazy(() => import('../../Components/Header'));
+    const MainSection = lazy(() => import('./_components/MainSection'));
+    const Category = lazy(() => import('./_components/Category'));
+    const CannedFood = lazy(() => import('./_components/CannedFood'));
+    const Products = lazy(() => import('./_components/Products'));
+    const Offers = lazy(() => import('./_components/Offers'));
+    const SellingProducts = lazy(() => import('./_components/SellingProducts'));
+    const OurBlog = lazy(() => import('./_components/OurBlog'));
+    const ShopApp = lazy(() => import('./_components/ShopApp'));
+    const Discover = lazy(() => import('./_components/Discover'));
+    const Footer = lazy(() => import('../../Components/Footer'));
+
+
 
     return (
         <>
-            <Header UserData={UserData} />
-            <MainSection />
-            <Category />
-            <CannedFood />
-            <Products UserData={UserData} />
-            <Offers />
-            <SellingProducts />
-            <Discount />
-            <PopularProducts />
-            <JustArrived />
-            <OurBlog />
-            <ShopApp />
-            <Discover />
-            <Footer />
+            <Suspense fallback={<div>
+                <Loading />
+            </div>}>
+                <Header UserData={UserData} />
+                <MainSection />
+                <Category />
+                <CannedFood />
+                <Products UserData={UserData} />
+                <Offers />
+                <SellingProducts />
+                <Discount />
+                <PopularProducts />
+                <JustArrived />
+                <OurBlog />
+                <ShopApp />
+                <Discover />
+                <Footer />
+            </Suspense>
         </>
     );
 }

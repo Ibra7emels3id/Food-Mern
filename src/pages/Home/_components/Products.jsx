@@ -10,9 +10,9 @@ import { AddToCart, fetchCartProduct } from '../../../features/CartSlice';
 const Products = () => {
     const dispatch = useDispatch();
     const { products } = useSelector((state) => state.Product);
-    const sortProduct = Array.isArray(products)
-    ? [...products].sort(() => Math.random() - 0.5)
-    : [];
+    // const sortProduct = Array.isArray(products)
+    // ? [...products].sort(() => Math.random() - 0.5)
+    // : [];
     const { cart } = useSelector((state) => state.cart);
     const [loaderSpiner, setLoaderSpinner] = useState(null)
     const { user } = useSelector((state) => state.user)
@@ -28,7 +28,7 @@ const Products = () => {
 
 
 
-    const Items = sortProduct?.slice(0, 10).map((item) => {
+    const Items = products?.slice(0, 10).map((item) => {
         return (
             <div key={item._id} className="product relative pt-5 px-5 pb-3 bg-white rounded-lg hover:shadow-xl">
                 <div className="flex items-center justify-center bg-[#f9f9f9] rounded-lg">

@@ -1,6 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import img1 from '../../../assets/images/post-thumb-1.jpg'
+import img2 from '../../../assets/images/post-thumb-2.jpg'
+import img3 from '../../../assets/images/post-thumb-3.jpg'
+
 
 
 const OurBlog = () => {
@@ -17,7 +21,7 @@ const OurBlog = () => {
                             <div className="bg-white cursor-pointer rounded p-3 overflow-hidden shadow-xl relative top-0 hover:-top-2 transition-all duration-300">
                                 <img
                                     loading='lazy'
-                                    src="https://readymadeui.com/Imagination.webp"
+                                    src={img1}
                                     alt="Blog Post 1"
                                     className="w-full h-60 object-cover rounded-lg"
                                 />
@@ -39,7 +43,7 @@ const OurBlog = () => {
                             <div className="bg-white cursor-pointer rounded overflow-hidden shadow-xl p-3 relative top-0 hover:-top-2 transition-all duration-300">
                                 <img
                                     loading='lazy'
-                                    src="https://readymadeui.com/hacks-watch.webp"
+                                    src={img2}
                                     alt="Blog Post 2"
                                     className="w-full h-60 object-cover rounded-lg"
                                 />
@@ -61,7 +65,7 @@ const OurBlog = () => {
                             <div className="bg-white cursor-pointer rounded overflow-hidden shadow-xl p-3 relative top-0 hover:-top-2 transition-all duration-300">
                                 <img
                                     loading='lazy'
-                                    src="https://readymadeui.com/prediction.webp"
+                                    src={img3}
                                     alt="Blog Post 3"
                                     className="w-full rounded-lg h-60 object-cover"
                                 />

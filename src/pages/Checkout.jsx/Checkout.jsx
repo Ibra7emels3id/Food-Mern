@@ -28,7 +28,7 @@ const CheckoutForm = () => {
         tex: '',
     });
 
-    console.log(cart?.cart?._id);
+    // console.log( cart?.cart?.items);
 
     // Handle Input Events
     const HandleInputChange = (e) => {

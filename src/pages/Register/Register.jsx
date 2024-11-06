@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Footer from '../../Components/Footer';
 import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
+import Loading from '../../Components/Loading';
 
 
 
@@ -12,10 +13,8 @@ const register = () => {
     const User = true
     const [loading, setLoading] = useState(false)
     const [CheckPass, setCheckPass] = useState('password')
-    const {user , sLoading} = useSelector((state) => state.user)
+    const { user, sLoading } = useSelector((state) => state.user)
     const [data, setData] = useState({})
-
-    console.log(data);
 
     // HandleChange events
     const handleChange = (e) => {
@@ -33,17 +32,10 @@ const register = () => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(data),
-            })
-            const json = await response.json()
-            if (json.status === 201) {
+            }).then(()=>{
                 toast.success('User Registration Successful')
-                setData({ name: '', email: '', password: '' })
-            } else {
-                // toast.error('Failed to Register User')
-                console.log(json.message)
-                setLoading(false)
-            }
-            Navigate('/login')
+                Navigate('/login')
+            })
         } catch (error) {
             console.log(error.message);
             toast.error(error.message)
@@ -60,15 +52,6 @@ const register = () => {
         if (user?.user) {
             Navigate('/');
         }
-    }
-
-
-    // Set The Loading Dom
-    if (loading) {
-        return <div className="flex items-center justify-center h-screen">
-            <div className="animate-spin text-4xl text-blue-500 mr-4"></div>
-            <p className="text-gray-600">Loading...</p>
-        </div>
     }
 
 
@@ -182,7 +165,7 @@ const register = () => {
                                     <div className="flex flex-wrap items-center justify-between gap-4">
                                         <div className="flex items-center">
                                             <input
-                                                onChange={(e)=>{
+                                                onChange={(e) => {
                                                     console.log(e);
                                                 }}
                                                 id="remember-me"

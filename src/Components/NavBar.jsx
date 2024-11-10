@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import logo from '../assets/images/boy.png';
 
 const NavBar = ({ dilogShow }) => {
     const { user } = useSelector((state) => state.user)
@@ -102,10 +103,10 @@ const NavBar = ({ dilogShow }) => {
                         </li>}
                     </ul>
                     {user?.user && <Link to={`/account/${user?.user?._id}`} className="flex flex-wrap items-center cursor-pointer border-t border-gray-300 px-4 py-4">
-                        <img
-                            src={`${import.meta.env.VITE_SOME_URL}/Uploads/${user?.user?.image}`}
+                        {user?.user?.image ? <img
+                            src={user?.user?.image}
                             className="w-9 h-9 rounded-full border-white"
-                        />
+                        /> : <img className='w-10 h-10 rounded-full' src={logo} alt="Profile Picture" />}
                         <div className="ml-4">
                             <p className="text-sm text-black">{user?.user?.name}</p>
                             <p className="text-xs text-gray-500 mt-0.5">Active free account</p>

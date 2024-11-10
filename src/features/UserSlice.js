@@ -3,6 +3,22 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 
+// Login User 
+export const loginUser = createAsyncThunk('loginUser', async ({ data }) => {
+    try {
+        const res = await axios.post(`${import.meta.env.VITE_SOME_URL}/api/users/login`, data)
+        if (res.status === 200) {
+            toast.success(res.data.message)
+            localStorage.setItem('token', res.data.token)
+        } else {
+            toast.error(res.data.message)
+        }
+    } catch (error) {
+        console.log(error)
+        toast.error('Invalid Email or Password')
+    }
+})
+
 // Fetch the User
 export const fetchUser = createAsyncThunk('fetchUser', async () => {
     const token = localStorage.getItem('token');

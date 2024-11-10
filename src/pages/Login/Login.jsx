@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../../Components/Header';
 import { Link, useNavigate } from 'react-router-dom';
 import Footer from '../../Components/Footer';
 import { toast } from 'react-toastify';
 import axios from 'axios'
 import Loading from '../../Components/Loading';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchUser, loginUser } from '../../features/UserSlice';
 
 
 const Login = () => {
-    const Navigate = useNavigate()
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [loading, setLoading] = useState(false)
     const [CheckPass, setCheckPass] = useState('password')
     const [data, setData] = useState({})
@@ -20,48 +22,38 @@ const Login = () => {
     const handleChange = (e) => {
         setData({ ...data, [e.target.name]: e.target.value })
     }
+    
 
     // Handle Submit Data to the server
     const handleSubmit = async (e) => {
-        e.preventDefault()
-        setLoading(true)
-        try {
-            const res = await axios.post(`${import.meta.env.VITE_SOME_URL}/api/users/login`, data)
-            if (res.status === 200) {
-                toast.success(res.data.message)
-                localStorage.setItem('token', res.data.token)
-                if (res.data.role === 'admin') {
-                    window.location.href = '/admin'
-                    Navigate('/admin')
-                } else {
-                    window.location.href = '/'
-                }
+        e.preventDefault();
+        setLoading(true);
+        await dispatch(loginUser({ data })).unwrap();
+        dispatch(fetchUser())
+        setLoading(false);
+    };
+
+    // Fetch Data Login     
+    useEffect(() => {
+        dispatch(fetchUser());
+    }, [])
+
+    useEffect(() => {
+        if (user) {
+            if (user.role === 'admin') {
+                navigate('/admin');
             } else {
-                toast.error(res.data.message)
+                navigate('/');
             }
-            setLoading(false)
-        } catch (error) {
-            console.log(error)
-            toast.error('Invalid Email or Password')
-            setLoading(false)
-        } finally {
-            setLoading(false)
         }
-    }
-
-
-    // Check if user is logged in or not
-    if (!sLoading) {
-        if (user?.user) {
-            Navigate('/');
-        }
-    }
+    }, [user, navigate]);
 
 
     // Add Loading 
     if (sLoading) {
         return <Loading />
     }
+
 
     return (
         <>

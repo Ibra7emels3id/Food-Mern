@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from '../../assets/images/logo.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import CategoryIcon from '@mui/icons-material/Category';
 import { logOutUser } from '../../features/UserSlice';
@@ -8,9 +8,11 @@ import { useDispatch } from 'react-redux';
 
 const Header = () => {
     const dispatch = useDispatch()
+    const Navigate = useNavigate()
+
     return (
         <>
-            <nav className="bg-[#ededed] h-screen fixed top-12 left-0 md:min-w-[250px] py-6 md:px-4 font-[sans-serif]">
+            <nav className="bg-[#ededed] z-[1000] h-screen fixed top-12 left-0 md:min-w-[250px] py-6 md:px-4 font-[sans-serif]">
                 <div className="overflow-auto py-6 h-full mt-4">
                     <ul className="space-y-1">
                         <li>
@@ -90,7 +92,7 @@ const Header = () => {
                         </li>
                         <li>
                             <Link
-                                href="/"
+                                to="/admin/banners"
                                 className="text-black hover:text-yellow text-[15px] flex items-center hover:bg-white rounded px-4 py-3 transition-all"
                             >
                                 <svg
@@ -108,7 +110,7 @@ const Header = () => {
                                         data-original="#000000"
                                     />
                                 </svg>
-                                <span className=' hidden md:flex'>Refunds</span>
+                                <span className=' hidden md:flex'>Banners</span>
                             </Link>
                         </li>
                         <li>
@@ -132,6 +134,10 @@ const Header = () => {
                         </li>
                         <li>
                             <button
+                            onClick={()=>{
+                                dispatch(logOutUser())
+                                Navigate('/')
+                            }}
                                 className="text-black w-full hover:text-yellow text-[15px] flex items-center hover:bg-white rounded px-4 py-3 transition-all"
                             >
                                 <svg
@@ -151,7 +157,7 @@ const Header = () => {
                     </ul>
                 </div>
             </nav>
-            <div className="px-5 flex bg-[#ededed] items-center w-full  justify-between fixed h-[70px]">
+            <div className="px-5 flex z-[1000] bg-[#ededed] items-center w-full  justify-between fixed h-[70px]">
                 <div className="flex items-center space-x-4">
                     <div className="relative flex flex-col">
                         <Link to="/">
@@ -165,6 +171,7 @@ const Header = () => {
                 </div>
                 <button onClick={()=>{
                     dispatch(logOutUser())
+                    Navigate('/')
                 }} className="h-12 w-12 flex items-center justify-center rounded-l text-black hover:text-yellow text-3xl">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"

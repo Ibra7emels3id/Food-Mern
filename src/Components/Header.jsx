@@ -1,6 +1,6 @@
 import { Avatar, Badge, Stack, styled } from '@mui/material';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCartProduct } from '../features/CartSlice';
 import Dropdown from '@mui/joy/Dropdown';
@@ -9,7 +9,7 @@ import Menu from '@mui/joy/Menu';
 import MenuButton from '@mui/joy/MenuButton';
 import MenuItem from '@mui/joy/MenuItem';
 import MoreVert from '@mui/icons-material/MoreVert';
-import { logOutUser } from '../features/UserSlice';
+import { fetchUser, logOutUser } from '../features/UserSlice';
 import NavBar from './NavBar';
 import logo from '../assets/images/boy.png';
 
@@ -43,8 +43,8 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 }));
 
 
-const Header = ({ UserData }) => {
-    const User = UserData?.user
+const Header = () => {
+    const Navigate = useNavigate()
     const dispatch = useDispatch();
     const { cart } = useSelector((state) => state.cart)
     const { user } = useSelector((state) => state.user)
@@ -80,13 +80,14 @@ const Header = ({ UserData }) => {
     // handle LogOut 
     const handleLogOut = async () => {
         await dispatch(logOutUser());
-        window.location.href = "/";
+        dispatch(fetchUser());
+        Navigate('/')
     }
 
     // UseEffects
     useEffect(() => {
-        dispatch(fetchCartProduct({ User }))
-    }, [User]);
+        dispatch(fetchCartProduct())
+    }, []);
 
     // handle Search Products
     useEffect(() => {
@@ -204,21 +205,26 @@ const Header = ({ UserData }) => {
                                         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
                                         variant="dot"
                                     >
-                                        {user?.user?.image ? <img
+                                        {user?.user?.image ? user?.role === 'user' ? <img
                                             className="w-10 h-10 rounded-full"
                                             src={user?.user?.image}
                                             alt=""
-                                        /> :  <img className='w-10 h-10 rounded-full' src={logo} alt="Profile Picture" />}
-                                        {/* <Avatar sx={{ width: '35px', height: '35px' }} alt="Remy Sharp" src={`${import.meta.env.VITE_SOME_URL}/Uploads/${user?.user?.image}`} /> */}
+                                        /> : <Link to={'/admin'}>
+                                            <img
+                                                className="w-10 h-10 rounded-full"
+                                                src={user?.user?.image}
+                                                alt=""
+                                            />
+                                        </Link> : <img className='w-10 h-10 rounded-full' src={logo} alt="Profile Picture" />}
                                     </StyledBadge>
                                 </Stack>
                                 {/* <MoreVert /> */}
                             </MenuButton>
                             <Menu sx={{ width: '200px' }}>
-                                <MenuItem><Link to={`/account/${user?.user?._id}`}>Profile</Link></MenuItem>
-                                <MenuItem><Link to={'/transactions'}>Transactions</Link></MenuItem>
+                                <MenuItem><Link className='w-full' to={`/account/${user?.user?._id}`}>Profile</Link></MenuItem>
+                                <MenuItem><Link className='w-full' to={'/transactions'}>Transactions</Link></MenuItem>
                                 <MenuItem>
-                                    <button onClick={handleLogOut}>Logout</button>
+                                    <button className='w-full text-start' onClick={handleLogOut}>Logout</button>
                                 </MenuItem>
                             </Menu>
                         </Dropdown> : <Link to={'/login'}>

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts } from '../../../features/ProductSlice';
 import Header from '../../components/Header';
 import { Link, useNavigate } from 'react-router-dom';
-import { Dialog, Paper, Rating, styled, Table, TableBody, TableCell, tableCellClasses, TableContainer, TableHead, TableRow } from '@mui/material';
+import {  Paper, Rating, styled, Table, TableBody, TableCell, tableCellClasses, TableContainer, TableHead, TableRow } from '@mui/material';
 import DialogDelProduct from './_components/DialogDelProduct';
 import Loading from '../../../Components/Loading';
 

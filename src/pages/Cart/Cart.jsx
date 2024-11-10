@@ -4,34 +4,30 @@ import Footer from '../../Components/Footer';
 import { Link, useNavigate } from 'react-router-dom';
 import { AddToCart, fetchCartProduct, RemoveCartItem, RemoveFromCart } from '../../features/CartSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchOffers } from '../../features/BannersSlice';
 
 const Cart = () => {
     const Navigate = useNavigate()
     const dispatch = useDispatch();
     const cartProducts = useSelector(state => state.cart);
+    const {offers} = useSelector((state) => state.offers)
     const User = useSelector(state => state.user);
     const user = User?.user?.user
-    const [loaderSpinner, setLoaderSpinner] = useState(null)
+    const [ setLoaderSpinner] = useState(null)
     const [discount, setDiscount] = useState(null)
     const [PromoCode, setPromoCode] = useState(null)
     const [valueCode, setValueCode] = useState(null)
 
-    const DiscountCode = [
-        { code: 'SUMMER2022', discount: 10 },
-        { code: 'NEWYEAR2023', discount: 15 },
-        { code: 'VALENTINE2023', discount: 20 },
-    ];
-
     // Handle Discount Promo Code 
     const HandleCodeDiscount = () => {
-        let found = DiscountCode.find(code => code.code === PromoCode);
-        setValueCode(found.discount)
+        let found = offers?.find(code => code?.code === PromoCode);
+        setValueCode(found?.discount)
         if (found) {
-            let discountAmount = (found.discount / 100) * discount;
+            let discountAmount = (found?.discount / 100) * discount;
             let newTotal = discount - discountAmount;
             setDiscount(newTotal);
         } else {
-            setDiscount(null);
+            setDiscount(cartProducts?.cart?.totalPrice);
         }
     }
 
@@ -138,6 +134,7 @@ const Cart = () => {
     // useEffect
     useEffect(() => {
         dispatch(fetchCartProduct());
+        dispatch(fetchOffers())
     }, [dispatch]);
 
 
@@ -146,12 +143,7 @@ const Cart = () => {
             setDiscount(cartProducts?.cart?.totalPrice)
         }
     }, [cartProducts?.cart])
-
-
-
-    console.log(discount);
-
-
+    
 
     return (
         <>

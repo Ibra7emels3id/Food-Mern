@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import Header from '../../components/Header';
-import { useDispatch, useSelector } from 'react-redux';
-import { AddProductCart, fetchProducts } from '../../../features/ProductSlice';
-import { Rating } from '@mui/material';
+import { useDispatch } from 'react-redux';
 import { AddToCategory } from '../../../features/CategorySlice';
 import { useNavigate } from 'react-router-dom';
 
@@ -36,9 +34,6 @@ const AddCategory = () => {
             console.error('Failed to add product:', error);
         }
     }
-
-
-    console.log(product);
 
 
 

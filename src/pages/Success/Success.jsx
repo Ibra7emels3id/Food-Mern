@@ -1,20 +1,15 @@
-import { Button, Card, CardContent } from '@mui/material';
-import React, { useEffect } from 'react';
+import { Card, CardContent } from '@mui/material';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { fetchCartPayment } from '../../features/CartPaymentSlice';
-import { fetchUser } from '../../features/UserSlice'
 
 const Success = () => {
     const { cartPayment } = useSelector((state) => state.cartPay)
-    const { user } = useSelector((state) => state.user)
     const dispatch = useDispatch();
     const { id } = useParams()
 
     const FilterData = cartPayment?.find((it) => it.paymentId === id)
-
-    console.log(FilterData);
-
 
     useEffect(() => {
         dispatch(fetchCartPayment())

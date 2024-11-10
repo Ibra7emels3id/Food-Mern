@@ -32,6 +32,10 @@ import About from './pages/About/About';
 import Contact from './pages/Contact/Contact';
 import Review from './pages/Review/Review';
 import Team from './pages/Team/Team';
+import Banner from './admin/pages/Banner/Banners';
+import AddBannerHeader from './admin/pages/Banner/AddBannerHeader';
+import UpdateBanner from './admin/pages/Banner/UpdateBanner';
+import AddOffer from './admin/pages/Banner/AddOffer';
 
 function App() {
     const token = localStorage.getItem('token');
@@ -102,6 +106,13 @@ function App() {
                     <Route path="/admin/audience" element={<Audience />} />
                     <Route path="/admin/order" element={<Order />} />
                     <Route path="/admin/product/edit-product/:id" element={<UpdateProduct />} />
+                    <Route path="/admin/banners" element={<Banner />} />
+                    <Route path="/admin/banner/Addbannerheader" element={<AddBannerHeader />} />
+                    <Route path="/admin/banner/update-banner/:id" element={<UpdateBanner />} />
+                    <Route path="/admin/banner/Offer" element={<AddOffer />} />
+
+
+
                 </Routes>
             </BrowserRouter>
         </>

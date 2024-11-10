@@ -1,22 +1,12 @@
-import React, { lazy, Suspense, useEffect, useState } from 'react';
+import React, { lazy, Suspense } from 'react';
 import Discount from './_components/Discount';
 import PopularProducts from './_components/PopularProducts';
 import JustArrived from './_components/JustArrived';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchUser } from '../../features/UserSlice';
 import Loading from '../../Components/Loading';
 
-const Home = ({ UserData }) => {
-    const dispatch = useDispatch()
+const Home = () => {
 
 
-
-    useEffect(() => {
-        dispatch(fetchUser())
-    }, [])
-
-
-    // 
     const Header = lazy(() => import('../../Components/Header'));
     const MainSection = lazy(() => import('./_components/MainSection'));
     const Category = lazy(() => import('./_components/Category'));
@@ -28,19 +18,16 @@ const Home = ({ UserData }) => {
     const ShopApp = lazy(() => import('./_components/ShopApp'));
     const Discover = lazy(() => import('./_components/Discover'));
     const Footer = lazy(() => import('../../Components/Footer'));
-
-
+    const AlertOffer = lazy(() => import('./_components/AlertOffer'));
 
     return (
         <>
-            <Suspense fallback={<div>
-                <Loading />
-            </div>}>
-                <Header UserData={UserData} />
+            <Suspense fallback={<Loading />}>
+                <Header />
                 <MainSection />
                 <Category />
                 <CannedFood />
-                <Products UserData={UserData} />
+                <Products />
                 <Offers />
                 <SellingProducts />
                 <Discount />
@@ -50,9 +37,10 @@ const Home = ({ UserData }) => {
                 <ShopApp />
                 <Discover />
                 <Footer />
+                <AlertOffer />
             </Suspense>
         </>
     );
 }
 
-export default Home;
+export default React.memo(Home);

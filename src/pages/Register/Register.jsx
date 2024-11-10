@@ -26,7 +26,7 @@ const register = () => {
         e.preventDefault()
         setLoading(true)
         try {
-            const response = await fetch(`${import.meta.env.VITE_SOME_URL}/api/users`, {
+            await fetch(`${import.meta.env.VITE_SOME_URL}/api/users`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -185,7 +185,7 @@ const register = () => {
                                     </div>
                                     <div className="!mt-8">
                                         {loading ? <p
-                                            className="w-full py-3 px-4 text-sm tracking-wide rounded-lg text-white bg-yellow hover:bg-orange focus:outline-none"
+                                            className="w-full py-3 px-4 text-sm text-center tracking-wide rounded-lg text-white bg-yellow hover:bg-orange focus:outline-none"
                                         >
                                             Loading...
                                         </p> : <button

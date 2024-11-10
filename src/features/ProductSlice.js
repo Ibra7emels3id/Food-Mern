@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 export const fetchProducts = createAsyncThunk('fetchProducts', async () => {
     try {
         const response = await axios.get(`${import.meta.env.VITE_SOME_URL}/api/products`)
-        // console.log(response.data);
         return response.data;
     } catch (error) {
         console.log(error);
@@ -17,7 +16,6 @@ export const fetchProducts = createAsyncThunk('fetchProducts', async () => {
 export const fetchProductDetails = createAsyncThunk('fetchProductDetails', async (id) => {
     try {
         const response = await axios.get(`${import.meta.env.VITE_SOME_URL}/api/products/details/${id}`)
-        // console.log(response.data);
         return response.data;
     } catch (error) {
         console.log(error);

@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 // Fetch Cart Payment 
 export const fetchCartPayment = createAsyncThunk('fetchCartPayment', async (_, { getState }) => {
@@ -37,6 +38,17 @@ export const confirmOrderPayment = createAsyncThunk('confirmOrderPayment', async
         return { message: "Payment confirmed successfully" };
     } catch (error) {
         console.error("Error confirming order payment:", error);
+        throw error;
+    }
+});
+
+// delete order payment
+export const DeleteOrder = createAsyncThunk('DeleteOrder', async (id) => {
+    try {
+        await axios.delete(`${import.meta.env.VITE_SOME_URL}/api/delete-order/${id}`);
+        toast.info("Order deleted successfully");
+    } catch (error) {
+        console.error("Error delete order :", error);
         throw error;
     }
 });
@@ -93,6 +105,20 @@ const cartPaymentSlice = createSlice({
             // update the cart payment state
         })
         builder.addCase(confirmOrderPayment.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.error.message;
+        })
+
+        // delete order payment
+        builder.addCase(DeleteOrder.pending, (state) => {
+            state.loading = true;
+            state.error = null;
+        })
+        builder.addCase(DeleteOrder.fulfilled, (state, action) => {
+            state.loading = false;
+            state.error = null;
+        })
+        builder.addCase(DeleteOrder.rejected, (state, action) => {
             state.loading = false;
             state.error = action.error.message;
         })

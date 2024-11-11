@@ -19,36 +19,38 @@ const Footer = lazy(() => import('../../Components/Footer'));
 const AlertOffer = lazy(() => import('./_components/AlertOffer'));
 
 const Home = () => {
-    const { products } = useSelector((state) => state.Product)
+    const { products } = useSelector((state) => state.Product);
 
-    if (!products) return <Loading />;
+    if (!products) {
+        return < Loading />
+    };
 
     return (
         <>
-            <Suspense fallback={<Loading />}>
+            <Suspense>
                 <Header />
             </Suspense>
-            <Suspense fallback={<Loading />}>
+            <Suspense>
                 <MainSection />
                 <Category />
                 <CannedFood />
             </Suspense>
-            <Suspense fallback={<Loading />}>
+            <Suspense>
                 <Products />
                 <Offers />
                 <SellingProducts />
             </Suspense>
-            <Suspense fallback={<Loading />}>
+            <Suspense>
                 <Discount />
                 <PopularProducts />
                 <JustArrived />
             </Suspense>
-            <Suspense fallback={<Loading />}>
+            <Suspense>
                 <OurBlog />
                 <ShopApp />
                 <Discover />
             </Suspense>
-            <Suspense fallback={<Loading />}>
+            <Suspense>
                 <Footer />
                 <AlertOffer />
             </Suspense>

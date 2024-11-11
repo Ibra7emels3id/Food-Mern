@@ -5,8 +5,6 @@ import JustArrived from './_components/JustArrived';
 import Loading from '../../Components/Loading';
 
 const Home = () => {
-
-
     const Header = lazy(() => import('../../Components/Header'));
     const MainSection = lazy(() => import('./_components/MainSection'));
     const Category = lazy(() => import('./_components/Category'));
@@ -19,6 +17,8 @@ const Home = () => {
     const Discover = lazy(() => import('./_components/Discover'));
     const Footer = lazy(() => import('../../Components/Footer'));
     const AlertOffer = lazy(() => import('./_components/AlertOffer'));
+
+
 
     return (
         <>

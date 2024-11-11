@@ -10,10 +10,9 @@ const Cart = () => {
     const Navigate = useNavigate()
     const dispatch = useDispatch();
     const cartProducts = useSelector(state => state.cart);
-    const {offers} = useSelector((state) => state.offers)
+    const { offers } = useSelector((state) => state.offers)
     const User = useSelector(state => state.user);
     const user = User?.user?.user
-    const [ setLoaderSpinner] = useState(null)
     const [discount, setDiscount] = useState(null)
     const [PromoCode, setPromoCode] = useState(null)
     const [valueCode, setValueCode] = useState(null)
@@ -35,25 +34,19 @@ const Cart = () => {
 
     // Handle Add to Cart
     const HandleAddToCart = async (item) => {
-        setLoaderSpinner(item._id)
         await dispatch(AddToCart({ item }));
         dispatch(fetchCartProduct());
-        setLoaderSpinner(null);
     };
 
     // Handle Remove To Cart
     const HandleRemoveToCart = async (item) => {
-        setLoaderSpinner(item._id)
         await dispatch(RemoveFromCart({ item }));
         dispatch(fetchCartProduct());
-        setLoaderSpinner(null);
     };
 
     // Handle Dalete Item
     const handleDaleteItem = async (item) => {
-        setLoaderSpinner(item._id)
         dispatch(RemoveCartItem({ item }));
-        setLoaderSpinner(null);
         dispatch(fetchCartProduct());
         window.location.reload();
     };
@@ -143,7 +136,7 @@ const Cart = () => {
             setDiscount(cartProducts?.cart?.totalPrice)
         }
     }, [cartProducts?.cart])
-    
+
 
     return (
         <>
